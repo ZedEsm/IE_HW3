@@ -7,7 +7,7 @@ const router = express.Router();
 
 router
     .route("/admin/roles")
-    .post([Auth.isAuthenticated, RoleHandler.isAdmin], RoleController.create);
+    .post(RoleController.create);
 
 router
     .route("/admin/roles/:id")

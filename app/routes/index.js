@@ -10,6 +10,7 @@ import managerProfessorRoute from "./manager/professor.route.js";
 import managerStudentRoute from "./manager/student.route.js";
 import studentUpdate from "./student/student.route.js";
 import professorUpdate from "./professor/professor.route.js";
+import termRoute from "./manager/terms.route.js";
 
 import Logger from "../utils/logger.js";
 
@@ -34,5 +35,6 @@ export default (app) => {
     app.use(managerStudentRoute);
     app.use(studentUpdate);
     app.use(professorUpdate);
+    app.use(termRoute);
 
 };

@@ -865,7 +865,7 @@ components:
                 - $ref: "#/components/schemas/User"
                 - type: object
             required:
-                - college
+                - colleges
 
             properties:
                 college:
@@ -883,7 +883,7 @@ components:
                 - $ref: "#/components/schemas/User"
                 - type: object
             required:
-                - college
+                - colleges
                 - field
                 - rank
                 - courses
@@ -935,7 +935,7 @@ components:
                 - incomingYear
                 - incomingSemester
                 - gradeAverage
-                - college
+                - colleges
                 - field
 
             properties:

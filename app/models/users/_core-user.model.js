@@ -29,17 +29,17 @@ export default (mongoose) =>
                 email: Joi.string()
                     .trim()
                     .required()
-                    .email(),
+              ,
 
                 phone: Joi.string()
                     .trim()
-                    .required()
-                    .regex(/[0-9]{9,11}/),
+                    .required(),
+                 //   .regex(/[0-9]{9,11}/),
 
                 role: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "roles",
-                    required: true
+              //      required: true
                 },
             },
             baseCoreUserOption

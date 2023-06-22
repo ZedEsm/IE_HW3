@@ -10,6 +10,7 @@ import courses from "./courses/_core-course.model.js";
 import educationManagers from "./users/education-manager.model.js";
 import approvedCourses from "./courses/approved-course.model.js";
 import roles from "./roles/role.model.js";
+import term from "./terms/term.js";
 
 // config the database
 mongoose.Promise = global.Promise;
@@ -34,4 +35,7 @@ db.semesterCourses = semesterCourses(mongoose);
 // roles
 db.roles = roles(mongoose);
 db.ROLES = ["admin", "edu_manager", "professor", "student"];
+
+//terms
+db.terms = term(mongoose);
 export default db;

@@ -1,7 +1,7 @@
 {
-    "name": "ie_hw3",
+    "name": "ie_hw2",
     "version": "1.0.0",
-    "description": "Internet Engineering Homework 3",
+    "description": "Internet Engineering Homework 2",
     "main": "server.js",
     "type": "module",
     "scripts": {
@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ZedEsm/IE_HW3.git"
+        "url": "git+https://github.com/MSaeed1381/IE_HW2.git"
     },
     "keywords": [
         "Internet",
@@ -18,12 +18,12 @@
         "back-end",
         "MERN"
     ],
-    "author": "SaZed",
+    "author": "Saeed Zare",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ZedEsm/IE_HW3/issues"
+        "url": "https://github.com/MSaeed1381/IE_HW2/issues"
     },
-    "homepage": "https://github.com/ZedEsm/IE_HW3#readme",
+    "homepage": "https://github.com/MSaeed1381/IE_HW2#readme",
     "dependencies": {
         "bcrypt": "^5.1.0",
         "common-log-format": "^2.0.1",
