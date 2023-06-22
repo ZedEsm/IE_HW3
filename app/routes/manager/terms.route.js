@@ -20,4 +20,11 @@ router
         EducationAssistantController.getAllTerms
     );
 
+router
+    .route("/term/:id")
+    .get(
+        [Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.getTermById
+    );
+
 export default router;

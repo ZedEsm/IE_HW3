@@ -42,4 +42,31 @@ export default class EducationAssistantController {
                 );
         }
     }
+
+    static async getTermById(req, res) {
+        const id = req.params.id;
+        try {
+            const data = await Term.findById(id)//.populate('role'); //TODO:popolate role ok kon
+            if (data)
+                return res
+                    .status(200)
+                    .json(
+                        createResponse(true, `get Term with id ${id}.`, data)
+                    );
+            return res
+                .status(404)
+                .json(
+                    createResponse(false, `Term with id ${id} not found.`)
+                );
+        } catch (err) {
+            return res
+                .status(500)
+                .json(
+                    createResponse(
+                        false,
+                        err.message || `Could not get the Term.`
+                    )
+                );
+        }
+    }
 }
