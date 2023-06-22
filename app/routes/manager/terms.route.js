@@ -13,4 +13,11 @@ router
         EducationAssistantController.create
     );
 
+router
+    .route("/terms")
+    .get(
+        [Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.getAllTerms
+    );
+
 export default router;
