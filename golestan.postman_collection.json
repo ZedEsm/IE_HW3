@@ -1,0 +1,1143 @@
+{
+	"info": {
+		"_postman_id": "b643210d-4d39-444a-b2e0-868f506a2eef",
+		"name": "golestan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17533850"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "post-auth-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"password\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create admin",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Saeed Zare\",\r\n    \"user_id\": 1,\r\n    \"password\": \"1\",\r\n    \"email\": \"dasd@gmail.com\",\r\n    \"phone\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/6453a955c0aada6d676cec52",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"6453a955c0aada6d676cec52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "professors",
+					"item": [
+						{
+							"name": "Update Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWMxMGZmMzkzYTNkMDRkOWJhZDFkZSIsInJvbGUiOiI2NDVjN2ZiYjljYTlhYTJkMTQ1MmQ1NTQiLCJpYXQiOjE2ODM3OTEwMjEsImV4cCI6MTY4NDA1MDIyMX0.MkVLeAMUqHMscktbgtKB1dze2z5TTbOxAk5D4HTprSA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "access-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.OTkyNDMwNTM.m_MvipL3dgPAFfofz6VwLpXAmLAVskEMcoU3MGppQco",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"college\": \"CE\",\r\n    \"field\": \"Computer\",\r\n    \"rank\": \"full\",\r\n    \"full_name\": \"Mohammad Zare\",\r\n    \"user_id\": \"45632\",\r\n    \"password\": \"123456789\",\r\n    \"email\": \"Saeed1381@gmail.com\",\r\n    \"phone\": \"09140887539\",\r\n    \"courses\": [\"645c82e9274128a7f12f0dad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/645c9bd2a2049bc43a5ae661",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										"645c9bd2a2049bc43a5ae661"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Profeesor by user_id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/64482e91811859154579de9a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										"64482e91811859154579de9a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Professors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/Professors",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Professor with user_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/64482e91811859154579de9a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										"64482e91811859154579de9a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"full_name\": \"Razian\",\r\n            \"user_id\": 123,\r\n            \"password\": \"123\",\r\n            \"email\": \"stu@gmail.com\",\r\n            \"phone\": \"0912000\",\r\n            \"college\": \"CE\",\r\n            \"field\": \"CE\",\r\n            \"rank\": \"prof\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "students",
+					"item": [
+						{
+							"name": "Create New Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\": \"Asghar\",\r\n    \"user_id\": 99243037,\r\n    \"password\": \"123\",\r\n    \"email\": \"dasd@gmail.com\",\r\n    \"phone\": \"123\",\r\n    \"degree\": \"abc\", \r\n    \"incomingYear\": 1399, \r\n    \"incomingSemester\": 1399, \r\n    \"gradeAverage\": 18.5, \r\n    \"college\": \"CE\", \r\n    \"field\": \"CE\",\r\n    \"courses\": [\"645c82e9274128a7f12f0dad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/student",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"student"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTk5LCJyb2xlIjoiNjQ1MzllZDc5NjdiZDJmN2Y0NDg3YzQwIiwiaWF0IjoxNjgzNzMwNTg1LCJleHAiOjE2ODM5ODk3ODV9.GY0A21NCcXeaYbo8-c80tJIrTE9aQqe56P7VrKESwEQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\": [\r\n        \"64527983f4410eea5084183c\",\r\n        \"6452799ff4410eea50841840\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/student/6453e1f0b31192815c1ae408",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"student",
+										"6453e1f0b31192815c1ae408"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "managers",
+					"item": [
+						{
+							"name": "Create New Education Manager",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\": \"Ramak\", \r\n    \"user_id\": \"2\", \r\n    \"password\": \"2\", \r\n    \"email\": \"ramak@gmail.com\", \r\n    \"phone\": \"465123\",\r\n    \"college\": \"CE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/manager",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Managers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWMxMGZmMzkzYTNkMDRkOWJhZDFkZSIsInJvbGUiOiI2NDVjN2ZiYjljYTlhYTJkMTQ1MmQ1NTQiLCJpYXQiOjE2ODM5MTAzMjcsImV4cCI6MTY4NDE2OTUyN30.vM1x6DhW4YISgiLjMiB7e50c3f8Gm8Sb6rmrqMunEv0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/managers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "roles",
+					"item": [
+						{
+							"name": "Create New Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"saeed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/roles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles/645c80f688536fb069038d88",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles",
+										"645c80f688536fb069038d88"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Role",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"role2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/role/64539c4fd2e541f0896f3b54",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"64539c4fd2e541f0896f3b54"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Roles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Role By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles/64539ed7967bd2f7f4487c40",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles",
+										"64539ed7967bd2f7f4487c40"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "Get Student's Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM3ODkxODcsImV4cCI6MTY4NDA0ODM4N30.cb2Ktb03S-74DM6cxIpnzy8JcpzP0tvnAM_XfuJBHw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses?field=CE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "field",
+									"value": "CE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM3ODkxODcsImV4cCI6MTY4NDA0ODM4N30.cb2Ktb03S-74DM6cxIpnzy8JcpzP0tvnAM_XfuJBHw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses/645c82e9274128a7f12f0dad?field=CE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"645c82e9274128a7f12f0dad"
+							],
+							"query": [
+								{
+									"key": "field",
+									"value": "CE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM4MDAzMzgsImV4cCI6MTY4NDA1OTUzOH0.WvDAddqj3BFzLLWPBw2JLTTWpNgcmjyplo-SikZWWBo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"asghar moradi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/student/645c83c2274128a7f12f0db2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"student",
+								"645c83c2274128a7f12f0db2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "professor",
+			"item": [
+				{
+					"name": "Get All Professor's Courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses/645c82e9274128a7f12f0dad",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"645c82e9274128a7f12f0dad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"saeed zare\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Professor/645c9bd2a2049bc43a5ae661",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Professor",
+								"645c9bd2a2049bc43a5ae661"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "Create new Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM5MDg1MTgsImV4cCI6MTY4NDE2NzcxOH0.5gRXN1vMSJUL3Nl9R1FrhoZtmUJlkxhyWh5Ii8u2Ep4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"approved\",\r\n    \"courseName\": \"AP\",\r\n    \"prerequisites\" :[],\r\n    \"corequisites\": [],\r\n    \"unit\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/course",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create new Approved Course",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Data Base\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/course",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"course"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Create new Semester Course",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algo\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/course",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"course"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Get All Courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4MjRkMjc0MTI4YTdmMTJmMGRhMCIsInJvbGUiOiI2NDVjODA3Zjg4NTM2ZmIwNjkwMzhkODIiLCJpYXQiOjE2ODM5MDk1NDgsImV4cCI6MTY4NDE2ODc0OH0.0yE7IOPEecBcfzApyKx-jEcLNl87w2Gi3ZBhtZInyaE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Course By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/course/64527ac0f4410eea50841846",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course",
+										"64527ac0f4410eea50841846"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Course By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/course/64527ac0f4410eea50841846",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course",
+										"64527ac0f4410eea50841846"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4MjRkMjc0MTI4YTdmMTJmMGRhMCIsInJvbGUiOiI2NDVjODA3Zjg4NTM2ZmIwNjkwMzhkODIiLCJpYXQiOjE2ODM3OTUxNjksImV4cCI6MTY4NDA1NDM2OX0.1g8lAqt8j5sRQVtplrIPt5FYpSsYWxbEMebZvXKHzEI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"prerequisites\": [\"645e66507aa9261d6899931d\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses/645e66d47aa9261d68999326",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses",
+										"645e66d47aa9261d68999326"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algo\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"64527a73f4410eea50841844\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algorithm\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "professor",
+					"item": [
+						{
+							"name": "Get all Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/Professors",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"Professors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Professor By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/Professor/645c9bd2a2049bc43a5ae661",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"Professor",
+										"645c9bd2a2049bc43a5ae661"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "student",
+					"item": [
+						{
+							"name": "Get all Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Student by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/student/645c83c2274128a7f12f0db2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"student",
+										"645c83c2274128a7f12f0db2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000"
+		}
+	]
+}

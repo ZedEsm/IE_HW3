@@ -1,0 +1,1115 @@
+openapi: 3.0.0
+servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/SAEED1381/IE_HW2/1.0.0
+info:
+    description: Rest CRUD API for IE_HW2
+    version: "1.0.0"
+    title: IE_HW2 Rest Api
+    contact:
+        email: saeed1381@gmail.com
+    license:
+        name: MIT License
+        url: https://github.com/MSaeed1381/IE_HW2/blob/main/LICENSE
+
+tags:
+    - name: Login
+      description: get the jwt
+
+    - name: admin
+      description: Operations available to admin
+
+    - name: manager
+      description: Operations available to manager
+
+    - name: professor
+      description: Operations available to professor
+
+    - name: student
+      description: Operations available to student
+
+paths:
+    /login:
+        post:
+            tags:
+                - Login
+            summary: login and get jwt
+            operationId: login
+            description: |
+                By passing in the correct username and password, you can log in
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            required:
+                                - email
+                                - password
+                            properties:
+                                email:
+                                    type: string
+                                    format: email
+                                password:
+                                    type: string
+
+            responses:
+                "200":
+                    description: User Logged in
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    Success:
+                                        type: boolean
+                                    data:
+                                        type: object
+                                        properties:
+                                            full_name:
+                                                type: string
+                                            accessToken:
+                                                type: string
+                                    message:
+                                        type: string
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+
+                "404":
+                    $ref: "#/components/responses/NotFound"
+
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/Professor:
+        post:
+            tags:
+                - admin
+            description: create a new professor
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Professor"
+            responses:
+                "201":
+                    description: Professor Created Successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/Professor/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        delete:
+            tags:
+                - admin
+            description: delete a professor
+            responses:
+                "200":
+                    description: ok
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        get:
+            tags:
+                - admin
+            description: get a professor
+            responses:
+                "200":
+                    description: ok
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Professor"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            tags:
+                - admin
+            description: update a professor
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Professor"
+            responses:
+                "200":
+                    description: ok
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+    /admin/Professors:
+        get:
+            tags:
+                - admin
+            description: gets all professors
+            responses:
+                "200":
+                    description: ok
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Professor"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/student:
+        post:
+            description: create new student
+            tags:
+                - admin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Student"
+            responses:
+                "201":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/student/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        delete:
+            description: delete a student
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        get:
+            description: get all students
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Student"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            description: update a student
+            tags:
+                - admin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Student"
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+    /admin/students:
+        get:
+            description: get all students
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Student"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/manager:
+        post:
+            description: create a new manager
+            tags:
+                - admin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Manager"
+            responses:
+                "201":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /admin/manager/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        delete:
+            description: delete a manager
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        get:
+            description: get a manager
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Manager"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            description: update a manager
+            tags:
+                - admin
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Manager"
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+    /admin/managers:
+        get:
+            description: get all managers
+            tags:
+                - admin
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Manager"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /students:
+        get:
+            description: get all students
+            tags:
+                - manager
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Student"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /student/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        get:
+            description: get a student
+            tags:
+                - manager
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Student"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            description: update a student
+            tags:
+                - student
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Student"
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /Professors:
+        get:
+            description: gets all professors
+            tags:
+                - manager
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Professor"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /Professor/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        get:
+            description: get a professor user
+            tags:
+                - manager
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Professor"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            description: update a professor
+            tags:
+                - professor
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Professor"
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /course:
+        post:
+            description: create a new course
+            tags:
+                - manager
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Course"
+            responses:
+                "201":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+
+    /course/{id}:
+        parameters:
+            - in: path
+              name: id
+              schema:
+                  type: string
+              required: true
+        delete:
+            description: delete a course
+            tags:
+                - manager
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        get:
+            parameters:
+                - in: query
+                  name: field
+                  schema:
+                      type: string
+
+            description: get a course
+            tags:
+                - manager
+                - professor
+                - student
+
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Course"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+        put:
+            description: update a course
+            tags:
+                - manager
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Course"
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/responses/Success"
+                "400":
+                    $ref: "#/components/responses/BadRequest"
+                "404":
+                    $ref: "#/components/responses/NotFound"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+    /courses:
+        get:
+            parameters:
+                - in: query
+                  name: field
+                  schema:
+                      type: string
+
+            description: gets all courses
+            tags:
+                - manager
+                - student
+                - professor
+
+            responses:
+                "200":
+                    description: success
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Course"
+                "401":
+                    $ref: "#/components/responses/Unauthorized"
+
+                "403":
+                    $ref: "#/components/responses/AccessDenied"
+                "500":
+                    $ref: "#/components/responses/ServerError"
+components:
+    responses:
+        Success:
+            description: done Successfully
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            Success:
+                                type: boolean
+                                example: true
+                            data:
+                                type: object
+                            message:
+                                type: string
+
+        Unauthorized:
+            description: token not provided
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            Success:
+                                type: boolean
+                                example: false
+                            message:
+                                type: string
+                                example: "token not provided"
+
+        AccessDenied:
+            description: access denied
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            Success:
+                                type: boolean
+                                example: false
+                            message:
+                                type: string
+                                example: "access denied"
+
+        BadRequest:
+            description: bad request
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            Success:
+                                type: boolean
+                                example: false
+                            message:
+                                type: string
+                                example: "bad request"
+
+        NotFound:
+            description: not found
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            Success:
+                                type: boolean
+                                example: false
+                            message:
+                                type: string
+                                example: "not found"
+
+        ServerError:
+            description: Internal Server Error
+            content:
+                application/json:
+                    schema:
+                        type: object
+
+                        properties:
+                            Success:
+                                type: boolean
+                                example: false
+                            message:
+                                type: string
+                                example: "Internal Server Error"
+    schemas:
+        User:
+            type: object
+            required:
+                - objectId
+                - full_name
+                - user_id
+                - password_hash
+                - email
+                - phone
+                - role
+
+            properties:
+                objectId:
+                    type: string
+                    format: ObjectId
+                    example: 645c82e9274128a7f12f0dad
+
+                full_name:
+                    type: string
+                    example: "Saeed Zare"
+
+                user_id:
+                    type: number
+                    example: 99243037
+
+                password_hash:
+                    type: string
+                    example: "123456"
+
+                email:
+                    type: string
+                    format: email
+                    example: "test@test.com"
+
+                phone:
+                    type: string
+                    format: phone
+                    example: "09121112233"
+                    minLength: 9
+                    maxLength: 11
+
+                updatedAt:
+                    type: string
+                    format: date-time
+                    example: "2020-08-29T09:12:33.001Z"
+
+                createdAt:
+                    type: string
+                    format: date-time
+                    example: "2020-08-29T09:12:33.001Z"
+
+                role:
+                    $ref: "#/components/schemas/Role"
+
+        Manager:
+            allOf:
+                - $ref: "#/components/schemas/User"
+                - type: object
+            required:
+                - college
+
+            properties:
+                college:
+                    type: string
+                    format: ObjectId
+                    example: "CE"
+
+        Admin:
+            allOf:
+                - $ref: "#/components/schemas/User"
+                - type: object
+
+        Professor:
+            allOf:
+                - $ref: "#/components/schemas/User"
+                - type: object
+            required:
+                - college
+                - field
+                - rank
+                - courses
+
+            properties:
+                college:
+                    type: string
+                    example: "CE"
+
+                field:
+                    type: string
+                    example: "CE"
+                    enum:
+                        - Literature
+                        - CE
+                        - Computer Engineering
+                        - Pharmacy
+                        - Mathematics
+                        - Physics
+                        - Music
+                        - Agricultural Chemistry
+                        - Biology
+
+                rank:
+                    type: string
+                    example: "Professor"
+                    enum:
+                        - Instructor
+                        - Assistant
+                        - Associate
+                        - Professor
+
+                courses:
+                    type: array
+                    items:
+                        type: string
+                        format: ObjectId
+                        $ref: "#/components/schemas/Course"
+
+                    example: ["645c82e9274128a7f12f0dad"]
+
+        Student:
+            allOf:
+                - $ref: "#/components/schemas/User"
+                - type: object
+
+            required:
+                - degree
+                - incomingYear
+                - incomingSemester
+                - gradeAverage
+                - college
+                - field
+
+            properties:
+                degree:
+                    type: string
+                    example: "bachelor"
+                    enum:
+                        - associate
+                        - bachelor
+                        - master
+                        - doctoral
+                        - professional
+
+                incomingYear:
+                    type: number
+                    minimum: 1330
+                    maximum: 1401
+                    example: 1400
+
+                incomingSemester:
+                    type: number
+                    minimum: 1330
+                    maximum: 1401
+                    example: 1399
+
+                gradeAverage:
+                    type: number
+                    minimum: 0
+                    maximum: 20
+                    example: 19.5
+
+                college:
+                    type: string
+                    example: "CE"
+
+                field:
+                    type: string
+                    example: "CE"
+                    enum:
+                        - Literature
+                        - CE
+                        - Computer Engineering
+                        - Pharmacy
+                        - Mathematics
+                        - Physics
+                        - Music
+                        - Agricultural Chemistry
+                        - Biology
+
+                courses:
+                    type: array
+                    items:
+                        type: string
+                        format: ObjectId
+                        $ref: "#/components/schemas/Course"
+
+                    example: ["645c82e9274128a7f12f0dad"]
+
+        Course:
+            type: object
+            required:
+                - objectId
+                - courseName
+                - field
+                - unit
+                - courseType
+
+            properties:
+                objectId:
+                    type: string
+                    format: ObjectId
+                    example: 645c82e9274128a7f12f0dad
+
+                courseName:
+                    type: string
+                    example: "AP"
+
+                courseType:
+                    type: string
+                    example: "approved"
+                    enum:
+                        - approved
+                        - semester
+
+                field:
+                    type: string
+                    example: CE
+                    enum:
+                        - Literature
+                        - CE
+                        - Computer Engineering
+                        - Pharmacy
+                        - Mathematics
+                        - Physics
+                        - Music
+                        - Agricultural Chemistry
+                        - Biology
+
+                prerequisites:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Course"
+
+                corequisites:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Course"
+
+                unit:
+                    type: number
+                    minimum: 0
+                    maximum: 4
+                    example: 3
+
+        approvedCourses:
+            allOf:
+                - $ref: "#/components/schemas/Course"
+                - type: object
+
+        semesterCourses:
+            allOf:
+                - $ref: "#/components/schemas/Course"
+                - type: object
+
+            required:
+                - classDate
+                - examDate
+                - examLocation
+                - courseProfessor
+                - capacity
+
+            properties:
+                classDate:
+                    type: string
+                    format: date-time
+                    example: "2020-08-29T09:12:33.001Z"
+
+                examDate:
+                    type: string
+                    format: date-time
+                    example: "2020-08-29T09:12:33.001Z"
+
+                examLocation:
+                    type: string
+                    example: "Tehran"
+
+                courseProfessor:
+                    type: string
+                    format: ObjectId
+                    $ref: "#/components/schemas/Professor"
+                    example: 645c82e9274128a7f12f0dad
+
+                capacity:
+                    type: number
+                    minimum: 0
+                    maximum: 200
+                    example: 50
+
+                educationSemester:
+                    type: string
+                    example: "bahar 1401"
+
+        Role:
+            type: object
+            required:
+                - objectId
+                - name
+
+            properties:
+                objectId:
+                    type: string
+                    format: ObjectId
+                    example: 645c82e9274128a7f12f0dad
+
+                name:
+                    type: string
+                    example: admin
