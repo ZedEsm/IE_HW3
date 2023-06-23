@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import {hash} from "bcrypt";
 
 import db from "../../models/index.js";
 import createResponse from "../../utils/create-response.js";
@@ -47,7 +47,7 @@ export default class StudentController {
             } = req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
-            const role = await Role.findOne({ name: ROLES[3] });
+            const role = await Role.findOne({name: ROLES[3]});
 
             const student = new Student({
                 full_name,
@@ -73,7 +73,7 @@ export default class StudentController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while creating the Student."
+                    "Some error occurred while creating the Student."
                 )
             );
         }
@@ -103,7 +103,7 @@ export default class StudentController {
                 .json(
                     false,
                     err.message ||
-                        "Some error occurred while updating the Student."
+                    "Some error occurred while updating the Student."
                 );
         }
     }
@@ -124,11 +124,12 @@ export default class StudentController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Student."
+                    "Some error occurred while deleting the Student."
                 )
             );
         }
     }
+
     static async getAllStudents(req, res) {
         try {
             const data = await Student.find().populate('role');
@@ -146,6 +147,7 @@ export default class StudentController {
                 );
         }
     }
+
     static async getStudentById(req, res) {
         const id = req.params.id;
         try {

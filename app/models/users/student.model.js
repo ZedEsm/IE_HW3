@@ -35,11 +35,11 @@ export default (mongoose) =>
                 .string()
                 .trim()
                 .valid("Literature", "CE", "Computer Engineering", "Pharmacy", "Mathematics",
-                "Physics", "Music", "Agricultural Chemistry", "Biology"),
+                    "Physics", "Music", "Agricultural Chemistry", "Biology"),
 
             courses: [{
-               type: mongoose.Schema.Types.ObjectId,
-               ref: 'courses',
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'courses',
             }],
         })
     );

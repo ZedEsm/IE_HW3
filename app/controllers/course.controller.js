@@ -39,7 +39,7 @@ export default class CourseController {
             }
 
             try {
-                const { courseName, prerequisites, corequisites, unit } =
+                const {courseName, prerequisites, corequisites, unit} =
                     req.body;
                 const course = new ApprovedCourse({
                     courseName,
@@ -56,7 +56,7 @@ export default class CourseController {
                     createResponse(
                         false,
                         err.message ||
-                            "Some error occurred while creating the Course."
+                        "Some error occurred while creating the Course."
                     )
                 );
             }
@@ -103,7 +103,7 @@ export default class CourseController {
                     createResponse(
                         false,
                         err.message ||
-                            "Some error occurred while creating the Course."
+                        "Some error occurred while creating the Course."
                     )
                 );
             }
@@ -137,7 +137,7 @@ export default class CourseController {
                 .json(
                     false,
                     err.message ||
-                        "Some error occurred while updating the Student."
+                    "Some error occurred while updating the Student."
                 );
         }
     }
@@ -158,11 +158,12 @@ export default class CourseController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Course."
+                    "Some error occurred while deleting the Course."
                 )
             );
         }
     }
+
     static async getAllCourses(req, res) {
         if (req.user_role === ROLES[1]) { // manager
             try {
@@ -204,7 +205,7 @@ export default class CourseController {
                     .status(404)
                     .json(createResponse(false, "courses not found"));
 
-            } catch (err){
+            } catch (err) {
                 console.log(err);
                 return res
                     .status(400)
@@ -214,6 +215,7 @@ export default class CourseController {
 
 
     }
+
     static async getCourseById(req, res) {
         const id = req.params.id;
 
@@ -258,8 +260,8 @@ export default class CourseController {
 
 
                 const user_field = req.query.field;
-                if (user_field){
-                    if (data.field !== user_field){
+                if (user_field) {
+                    if (data.field !== user_field) {
                         return res
                             .status(404)
                             .json(

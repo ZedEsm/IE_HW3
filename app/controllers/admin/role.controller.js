@@ -14,8 +14,8 @@ export default class RoleController {
         }
         // Save Student in the database
         try {
-            const { name } = req.body;
-            const role = new Role({ name });
+            const {name} = req.body;
+            const role = new Role({name});
             const data = await role.save(role);
             res.status(201).json(
                 createResponse(true, "Role Created Successfully!", data)
@@ -25,7 +25,7 @@ export default class RoleController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while creating the Role."
+                    "Some error occurred while creating the Role."
                 )
             );
         }
@@ -55,7 +55,7 @@ export default class RoleController {
                 .json(
                     false,
                     err.message ||
-                        "Some error occurred while updating the Role."
+                    "Some error occurred while updating the Role."
                 );
         }
     }
@@ -76,11 +76,12 @@ export default class RoleController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Role."
+                    "Some error occurred while deleting the Role."
                 )
             );
         }
     }
+
     static async getAllRoles(req, res) {
         try {
             const data = await Role.find();
@@ -98,6 +99,7 @@ export default class RoleController {
                 );
         }
     }
+
     static async getRoleById(req, res) {
         const id = req.params.id;
         try {

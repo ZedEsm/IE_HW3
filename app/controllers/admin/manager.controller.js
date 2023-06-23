@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import {hash} from "bcrypt";
 
 import db from "../../models/index.js";
 import createResponse from "../../utils/create-response.js";
@@ -20,18 +20,18 @@ const requiredEducationManagerParams = [
 export default class EducationController {
     static async create(req, res) {
         if (!existAllParams(requiredEducationManagerParams, req.body)) {
-                res
+            res
                 .status(400)
                 .json(createResponse(true, "Content is incomplete!"));
             return;
         }
         // Save Education Manager in the database
         try {
-            const { full_name, user_id, password, email, phone, college } =
+            const {full_name, user_id, password, email, phone, college} =
                 req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
-            const role = await Role.findOne({ name: ROLES[1] });
+            const role = await Role.findOne({name: ROLES[1]});
 
             const educationManager = new EducationManager({
                 full_name,
@@ -55,7 +55,7 @@ export default class EducationController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while creating the Education Manager."
+                    "Some error occurred while creating the Education Manager."
                 )
             );
         }
@@ -72,7 +72,7 @@ export default class EducationController {
             const data = await EducationManager.findByIdAndUpdate(
                 id,
                 req.body,
-                { useFindAndModify: true }
+                {useFindAndModify: true}
             );
             if (data)
                 return res
@@ -92,7 +92,7 @@ export default class EducationController {
                 .json(
                     false,
                     err.message ||
-                        "Some error occurred while updating the Education Manager."
+                    "Some error occurred while updating the Education Manager."
                 );
         }
     }
@@ -118,11 +118,12 @@ export default class EducationController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Education Manager."
+                    "Some error occurred while deleting the Education Manager."
                 )
             );
         }
     }
+
     static async getAllEducationManagers(req, res) {
         try {
             const data = await EducationManager.find().populate('role');
@@ -140,6 +141,7 @@ export default class EducationController {
                 );
         }
     }
+
     static async getEducationManagerById(req, res) {
         const id = req.params.id;
         try {

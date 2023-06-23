@@ -36,7 +36,7 @@ export default class RoleHandler {
         next();
     }
 
-    static async isManagerOrStudentOrProfessor(req, res, next){
+    static async isManagerOrStudentOrProfessor(req, res, next) {
 
         if (req.user_role !== ROLES[1] && req.user_role !== ROLES[2] && req.user_role !== ROLES[3])
             return res

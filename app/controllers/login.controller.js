@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import db from "../models/index.js";
-import { compare } from "bcrypt";
+import {compare} from "bcrypt";
 import createResponse from "../utils/create-response.js";
 import existAllParams from "../utils/exist-all-params.js";
 
@@ -17,7 +17,7 @@ export default class LoginController {
         const user_id = req.body.user_id;
         const password = String(req.body.password);
 
-        const user = await users.findOne({ user_id: user_id });
+        const user = await users.findOne({user_id: user_id});
         if (!user)
             return res
                 .status(404)
@@ -33,7 +33,7 @@ export default class LoginController {
 
         const fullName = user.full_name;
         const accessToken = jwt.sign(
-            { id: user._id, role: user.role },
+            {id: user._id, role: user.role},
             process.env.ACCESS_TOKEN_SECRET,
             {
                 expiresIn: 259200, // 3 day

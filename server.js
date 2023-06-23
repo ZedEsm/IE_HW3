@@ -1,4 +1,4 @@
-import express, { json, urlencoded } from "express";
+import express, {json, urlencoded} from "express";
 import rateLimit from 'express-rate-limit';
 import cors from "cors";
 import "dotenv/config";
@@ -20,9 +20,9 @@ const requestRateLimit = rateLimit({
 app.use(requestRateLimit);
 
 // middlewares
-app.use(cors({ origin: "http://127.0.0.1:3001" }));
+app.use(cors({origin: "http://127.0.0.1:3001"}));
 app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(urlencoded({extended: true}));
 
 
 try {
@@ -37,7 +37,7 @@ try {
 } catch (err) {
     console.log(
         err.message ||
-            "Can't Connect to database or Open a tcp socket connection"
+        "Can't Connect to database or Open a tcp socket connection"
     );
 }
 

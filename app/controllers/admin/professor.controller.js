@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import {hash} from "bcrypt";
 
 import db from "../../models/index.js";
 import createResponse from "../../utils/create-response.js";
@@ -40,7 +40,7 @@ export default class ProfessorController {
             } = req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
-            const role = await Role.findOne({ name: ROLES[2] });
+            const role = await Role.findOne({name: ROLES[2]});
 
             const professor = new Professor({
                 full_name,
@@ -62,7 +62,7 @@ export default class ProfessorController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while creating the Professor."
+                    "Some error occurred while creating the Professor."
                 )
             );
         }
@@ -90,7 +90,7 @@ export default class ProfessorController {
 
             let password_hash;
             if (password)
-                 password_hash = await hash(password, 10); // hash the password with salt round 10
+                password_hash = await hash(password, 10); // hash the password with salt round 10
 
 
             const professor = {
@@ -146,11 +146,12 @@ export default class ProfessorController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Professor."
+                    "Some error occurred while deleting the Professor."
                 )
             );
         }
     }
+
     static async getAllProfessors(req, res) {
         try {
             const data = await Professor.find().populate('role');
@@ -168,6 +169,7 @@ export default class ProfessorController {
                 );
         }
     }
+
     static async getProfessorById(req, res) {
         const id = req.params.id;
         try {

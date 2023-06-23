@@ -1,4 +1,5 @@
 import Joi from "joi";
+
 const baseCoreUserOption = {
     discriminator: "users",
     collection: "users",
@@ -29,17 +30,17 @@ export default (mongoose) =>
                 email: Joi.string()
                     .trim()
                     .required()
-              ,
+                ,
 
                 phone: Joi.string()
                     .trim()
                     .required(),
-                 //   .regex(/[0-9]{9,11}/),
+                //   .regex(/[0-9]{9,11}/),
 
                 role: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "roles",
-              //      required: true
+                    //      required: true
                 },
             },
             baseCoreUserOption

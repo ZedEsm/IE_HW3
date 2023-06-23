@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import {hash} from "bcrypt";
 
 import db from "../models/index.js";
 import createResponse from "../utils/create-response.js";
@@ -25,10 +25,10 @@ export default class AdminController {
         }
         // Save Student in the database
         try {
-            const { full_name, user_id, password, email, phone } = req.body;
+            const {full_name, user_id, password, email, phone} = req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
-            const role = await Role.findOne({ name: ROLES[0] });
+            const role = await Role.findOne({name: ROLES[0]});
 
             const admin = new Admin({
                 full_name,
@@ -47,7 +47,7 @@ export default class AdminController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while creating the Admin."
+                    "Some error occurred while creating the Admin."
                 )
             );
         }
@@ -69,7 +69,7 @@ export default class AdminController {
                 createResponse(
                     false,
                     err.message ||
-                        "Some error occurred while deleting the Admin."
+                    "Some error occurred while deleting the Admin."
                 )
             );
         }

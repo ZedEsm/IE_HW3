@@ -1,13 +1,11 @@
-import mongoose from "mongoose";
-
 export default (mongoose) => mongoose.model(
     "term",
     mongoose.Schema({
-        name:String,
-        user_id:[{
+        name: String,
+        user_id: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'BaseUserSchema',
-        }] ,
+        }],
         semester_courses: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'semesterCourses',

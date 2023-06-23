@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-export default (mongoose) => mongoose.model ("registration",{
+export default (mongoose) => mongoose.model("registration", {
     student: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "students",
