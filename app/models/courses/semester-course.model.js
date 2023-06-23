@@ -27,6 +27,6 @@ export default (mongoose) =>
 
             educationSemester: Joi
                 .string()
-                .trim()
+                .trim(),
         })
     );

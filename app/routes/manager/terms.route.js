@@ -40,4 +40,11 @@ router
         [Auth.isAuthenticated,RoleHandler.isManager],
         EducationAssistantController.deleteTermById
     )
+
+router
+    .route("/term/:id/preregistration")
+    .post(
+        [Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.providingSCPreregistration
+    )
 export default router;

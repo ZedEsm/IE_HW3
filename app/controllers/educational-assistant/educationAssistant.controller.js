@@ -17,9 +17,8 @@ export default class EducationAssistantController {
                     res.status(201).json(
                         createResponse(true, "Term Added Successfully!", data)
                     );
-                }
-                else {
-                    res.status(500).json(createResponse(false,"saving failed"))
+                } else {
+                    res.status(500).json(createResponse(false, "saving failed"))
                 }
             })
 
@@ -136,5 +135,24 @@ export default class EducationAssistantController {
                 )
             );
         }
+    }
+
+    static async providingSCPreregistration(req, res) {
+        const id = req.params.id
+        try {
+            const data = await Term.findById(id);
+           const preregistration_semester_course_list = data.preregistration_semester_course;
+            preregistration_semester_course_list.push(req.body.preregistration_semester_course);
+
+            data.preregistration_semester_course = preregistration_semester_course_list;
+            await data.save();
+
+            res.send(preregistration_semester_course_list);
+
+
+        } catch (err) {
+        }
+
+
     }
 }
