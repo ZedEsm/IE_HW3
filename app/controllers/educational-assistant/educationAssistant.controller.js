@@ -9,10 +9,20 @@ export default class EducationAssistantController {
             const term = new Term({
                 name, user_id, semester_courses
             })
-            const data = await term.save(term);
-            res.status(201).json(
-                createResponse(true, "Term Added Successfully!", data)
-            );
+
+            Term.find({user_id}).then(async data => {
+                const isNameMatching = data.some(obj => obj.name === name);
+                if (!isNameMatching) {
+                    const data = await term.save(term);
+                    res.status(201).json(
+                        createResponse(true, "Term Added Successfully!", data)
+                    );
+                }
+                else {
+                    res.status(500).json(createResponse(false,"saving failed"))
+                }
+            })
+
 
         } catch (err) {
             res.status(500).json(
@@ -70,7 +80,7 @@ export default class EducationAssistantController {
         }
     }
 
-    static async updateTermById (req,res) {
+    static async updateTermById(req, res) {
         if (!Object.keys(req.body).length) {
             return res
                 .status(400)
@@ -81,7 +91,7 @@ export default class EducationAssistantController {
             const data = await Term.findByIdAndUpdate(
                 id,
                 req.body,
-                { useFindAndModify: true }
+                {useFindAndModify: true}
             );
             if (data)
                 return res
@@ -103,6 +113,28 @@ export default class EducationAssistantController {
                     err.message ||
                     "Some error occurred while updating the Term."
                 );
+        }
+    }
+
+    static async deleteTermById(req, res) {
+        const id = req.params.id;
+        try {
+            const data = await Term.findByIdAndRemove(id);
+            if (data)
+                return res
+                    .status(200)
+                    .json(createResponse(true, "Term Deleted Successfully"));
+            return res
+                .status(404)
+                .json(createResponse(false, "Term not found!"));
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while deleting term."
+                )
+            );
         }
     }
 }

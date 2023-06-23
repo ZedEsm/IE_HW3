@@ -5,10 +5,8 @@ export default (mongoose) => mongoose.model(
     mongoose.Schema({
         name:String,
         user_id: {
-            type: Number,
-            unique: true,
-            required: true,
-            index: true
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'BaseUserSchema',
         },
         semester_courses: [{
             type: mongoose.Schema.Types.ObjectId,

@@ -33,4 +33,11 @@ router
         [Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.updateTermById
     );
+
+router
+    .route("/term/:id")
+    .delete(
+        [Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.deleteTermById
+    )
 export default router;
