@@ -69,4 +69,40 @@ export default class EducationAssistantController {
                 );
         }
     }
+
+    static async updateTermById (req,res) {
+        if (!Object.keys(req.body).length) {
+            return res
+                .status(400)
+                .json(createResponse(false, "Content can not be empty!"));
+        }
+        try {
+            const id = req.params.id;
+            const data = await Term.findByIdAndUpdate(
+                id,
+                req.body,
+                { useFindAndModify: true }
+            );
+            if (data)
+                return res
+                    .status(200)
+                    .json(
+                        createResponse(
+                            true,
+                            "Term Updated Successfully"
+                        )
+                    );
+            return res
+                .status(404)
+                .json(createResponse(false, "Term not found"));
+        } catch (err) {
+            return res
+                .status(500)
+                .json(
+                    false,
+                    err.message ||
+                    "Some error occurred while updating the Term."
+                );
+        }
+    }
 }
