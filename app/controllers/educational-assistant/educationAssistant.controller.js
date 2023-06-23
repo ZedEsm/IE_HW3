@@ -143,7 +143,6 @@ export default class EducationAssistantController {
             const data = await Term.findById(id);
             const preregistration_semester_course_list = data.preregistration_semester_course;
             preregistration_semester_course_list.push(req.body.preregistration_semester_course);
-
             data.preregistration_semester_course = preregistration_semester_course_list;
             await data.save();
             return res
@@ -179,6 +178,35 @@ export default class EducationAssistantController {
             );
         }
 
+    }
+
+    static async deleteSCPreregistration(req, res) {
+        const id = req.params.id
+        const course_id = req.params.cid
+        try {
+            const data = await Term.findById(id);
+            const preregistration_semester_course_list = data.preregistration_semester_course;
+            const isNameMatching = preregistration_semester_course_list.some(obj => obj.equals(course_id));
+            if (isNameMatching) {
+                const index = preregistration_semester_course_list.indexOf(course_id);
+                if (index !== -1) {
+                    preregistration_semester_course_list.splice(index, 1);
+                    data.preregistration_semester_course = preregistration_semester_course_list;
+                    await data.save();
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Semester Course Deleted Successfully"));
+                }
+            }
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while getting preregistration semester course."
+                )
+            );
+        }
     }
 
 
