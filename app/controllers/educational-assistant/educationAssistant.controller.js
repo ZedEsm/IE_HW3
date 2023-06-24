@@ -252,7 +252,33 @@ export default class EducationAssistantController {
 
     }
 
-
-
+    static async deleteSCRegistration(req, res) {
+        const id = req.params.id
+        const course_id = req.params.cid
+        try {
+            const data = await Term.findById(id);
+            const registration_semester_course_list = data.registration_semester_course;
+            const isNameMatching = registration_semester_course_list.some(obj => obj.equals(course_id));
+            if (isNameMatching) {
+                const index = registration_semester_course_list.indexOf(course_id);
+                if (index !== -1) {
+                   registration_semester_course_list.splice(index, 1);
+                    data.preregistration_semester_course = registration_semester_course_list;
+                    await data.save();
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Semester Course Deleted Successfully"));
+                }
+            }
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while getting registration semester course."
+                )
+            );
+        }
+    }
 
 }

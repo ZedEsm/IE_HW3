@@ -70,4 +70,9 @@ router
     .route("/term/:id/registration_courses")
     .get([Auth.isAuthenticated,RoleHandler.isManager],
         EducationAssistantController.getSCRegistered)
+
+router
+    .route("/term/:id/registration/:cid")
+    .delete([Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.deleteSCRegistration)
 export default router;
