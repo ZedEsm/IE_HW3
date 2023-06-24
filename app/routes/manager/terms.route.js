@@ -65,4 +65,9 @@ router
     .post([Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.providingSCRegistration
     )
+
+router
+    .route("/term/:id/registration_courses")
+    .get([Auth.isAuthenticated,RoleHandler.isManager],
+        EducationAssistantController.getSCRegistered)
 export default router;

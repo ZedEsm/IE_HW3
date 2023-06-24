@@ -232,5 +232,27 @@ export default class EducationAssistantController {
         }
     }
 
+    static async getSCRegistered(req, res) {
+        const id = req.params.id
+        try {
+            const data = await Term.findById(id);
+            const registration_semester_course_list = data.registration_semester_course;
+            return res
+                .status(200)
+                .json(createResponse(true, "Get All Registration Semester Course", registration_semester_course_list));
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while getting registration semester course."
+                )
+            );
+        }
+
+    }
+
+
+
 
 }
