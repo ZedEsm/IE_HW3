@@ -13,6 +13,10 @@ export default (mongoose) => mongoose.model(
         preregistration_semester_course: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'semesterCourses',
+        }],
+        registration_semester_course: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'semesterCourses',
         }]
     })
 )

@@ -50,13 +50,19 @@ router
 
 router
     .route("/term/:id/preregistration_courses")
-    .get([Auth.isAuthenticated,RoleHandler.isManager],
+    .get([Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.getSCPreregistered
     );
 
 router
     .route("/term/:id/preregistration/:cid")
-    .delete([Auth.isAuthenticated,RoleHandler.isManager],
+    .delete([Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.deleteSCPreregistration
     );
+
+router
+    .route("/term/:id/registration")
+    .post([Auth.isAuthenticated, RoleHandler.isManager],
+        EducationAssistantController.providingSCRegistration
+    )
 export default router;
