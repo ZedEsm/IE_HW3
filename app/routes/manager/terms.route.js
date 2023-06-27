@@ -2,6 +2,8 @@ import express from "express";
 import EducationAssistantController from "../../controllers/educational-assistant/educationAssistant.controller.js";
 import Auth from "../../middlewares/authentication.js";
 import RoleHandler from "../../middlewares/role.handler.js";
+import studentEducationalController from "../../controllers/edAssistant_student_common/student_educational.controller.js"
+
 
 const router = express.Router();
 
@@ -16,8 +18,8 @@ router
 router
     .route("/terms")
     .get(
-        [Auth.isAuthenticated, RoleHandler.isManager],
-        EducationAssistantController.getAllTerms
+        [Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
+        studentEducationalController.getAllTerms
     );
 
 router
@@ -44,14 +46,14 @@ router
 router
     .route("/term/:id/preregistration")
     .post(
-        [Auth.isAuthenticated, RoleHandler.isManager],
-        EducationAssistantController.providingSCPreregistration
+        [Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
+        studentEducationalController.providingSCPreregistration
     );
 
 router
     .route("/term/:id/preregistration_courses")
-    .get([Auth.isAuthenticated, RoleHandler.isManager],
-        EducationAssistantController.getSCPreregistered
+    .get([Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
+        studentEducationalController.getSCPreregistered
     );
 
 router

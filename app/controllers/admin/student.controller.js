@@ -7,6 +7,7 @@ import existAllParams from "../../utils/exist-all-params.js";
 const Student = db.students;
 const Role = db.roles;
 const ROLES = db.ROLES;
+const PREREGISTER = db.preregistration
 
 const requiredStudentParams = [
     "full_name",
@@ -172,6 +173,58 @@ export default class StudentController {
                         err.message || `Could not get the Student.`
                     )
                 );
+        }
+    }
+
+    static async preregisterDemand(req, res) {
+        try {
+            const student = req.user_id
+            const {courses} =
+                req.body;
+            const preregistration = new PREREGISTER({
+                student,
+                courses
+            });
+            const data = await preregistration.save(preregistration);
+            res.status(201).json(
+                createResponse(true, "Preregistered Successfully!", data)
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while Preregistering."
+                )
+            );
+        }
+    }
+
+    static async preregisterDemandById(req, res) {
+        try {
+            const id = req.params.id
+            const student = req.user_id
+            const preregister = await PREREGISTER.findById(id)
+            if (preregister.student && student == preregister.student) {
+                const course_lst = preregister.courses;
+                course_lst.push(req.body.courses)
+                preregister.courses = course_lst;
+                await preregister.save()
+                res.status(201).json(createResponse(true, "Preregistered Course Successfully"))
+            } else {
+                res.status(400).json(
+                    createResponse(false, "Access Denied")
+                );
+            }
+
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while Preregistering."
+                )
+            );
         }
     }
 }

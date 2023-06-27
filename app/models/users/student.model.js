@@ -41,5 +41,6 @@ export default (mongoose) =>
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'courses',
             }],
+
         })
     );

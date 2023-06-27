@@ -34,24 +34,6 @@ export default class EducationAssistantController {
         }
     }
 
-    static async getAllTerms(req, res) {
-        try {
-            const data = await Term.find();
-            return res
-                .status(200)
-                .json(createResponse(true, "get all terms", data));
-        } catch (err) {
-            return res
-                .status(500)
-                .json(
-                    createResponse(
-                        false,
-                        err.message || `Could not get all Terms.`
-                    )
-                );
-        }
-    }
-
     static async getTermById(req, res) {
         const id = req.params.id;
         try {
@@ -136,50 +118,6 @@ export default class EducationAssistantController {
             );
         }
     }
-
-    static async providingSCPreregistration(req, res) {
-        const id = req.params.id
-        try {
-            const data = await Term.findById(id);
-            const preregistration_semester_course_list = data.preregistration_semester_course;
-            preregistration_semester_course_list.push(req.body.preregistration_semester_course);
-            data.preregistration_semester_course = preregistration_semester_course_list;
-            await data.save();
-            return res
-                .status(200)
-                .json(createResponse(true, "semester course preregistered Successfully"));
-
-        } catch (err) {
-            res.status(500).json(
-                createResponse(
-                    false,
-                    err.message ||
-                    "Some error occurred while adding semester course to preregistration."
-                )
-            );
-        }
-    }
-
-    static async getSCPreregistered(req, res) {
-        const id = req.params.id
-        try {
-            const data = await Term.findById(id);
-            const preregistration_semester_course_list = data.preregistration_semester_course;
-            return res
-                .status(200)
-                .json(createResponse(true, "Get All Preregistration Semester Course", preregistration_semester_course_list));
-        } catch (err) {
-            res.status(500).json(
-                createResponse(
-                    false,
-                    err.message ||
-                    "Some error occurred while getting preregistration semester course."
-                )
-            );
-        }
-
-    }
-
     static async deleteSCPreregistration(req, res) {
         const id = req.params.id
         const course_id = req.params.cid
@@ -262,7 +200,7 @@ export default class EducationAssistantController {
             if (isNameMatching) {
                 const index = registration_semester_course_list.indexOf(course_id);
                 if (index !== -1) {
-                   registration_semester_course_list.splice(index, 1);
+                    registration_semester_course_list.splice(index, 1);
                     data.preregistration_semester_course = registration_semester_course_list;
                     await data.save();
                     return res

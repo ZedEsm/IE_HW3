@@ -20,4 +20,19 @@ router
         StudentController.getAllStudents
     );
 
+router
+    .route("/course/preregister/:id")
+    .post(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.preregisterDemandById
+
+    );
+
+router
+    .route("/course/preregister")
+    .post(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.preregisterDemand
+
+    );
 export default router;

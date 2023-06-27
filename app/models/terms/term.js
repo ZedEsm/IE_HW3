@@ -12,7 +12,7 @@ export default (mongoose) => mongoose.model(
         }],
         preregistration_semester_course: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'semesterCourses',
+            ref: 'preregistration',//TODO type
         }],
         registration_semester_course: [{
             type: mongoose.Schema.Types.ObjectId,
