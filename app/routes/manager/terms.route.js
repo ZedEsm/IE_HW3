@@ -70,8 +70,8 @@ router
 
 router
     .route("/term/:id/registration_courses")
-    .get([Auth.isAuthenticated,RoleHandler.isManager],
-        EducationAssistantController.getSCRegistered)
+    .get([Auth.isAuthenticated,RoleHandler.isManagerOrStudent],
+        studentEducationalController.getSCRegistered)
 
 router
     .route("/term/:id/registration/:cid")

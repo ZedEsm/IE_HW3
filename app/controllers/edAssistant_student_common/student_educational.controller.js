@@ -70,4 +70,28 @@ export default class studentEducationalController {
         }
 
     }
+
+    static async getSCRegistered(req, res) {
+        if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
+            const id = req.params.id
+            try {
+                const data = await Term.findById(id);
+                const registration_semester_course_list = data.registration_semester_course;
+                return res
+                    .status(200)
+                    .json(createResponse(true, "Get All Registration Semester Course", registration_semester_course_list));
+            } catch (err) {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        err.message ||
+                        "Some error occurred while getting registration semester course."
+                    )
+                );
+            }
+
+        }
+
+    }
+
 }
