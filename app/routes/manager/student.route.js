@@ -35,4 +35,11 @@ router
         StudentController.preregisterDemand
 
     );
+
+router
+    .route("/course/preregister/:id/:course_id")
+    .delete(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.deletePreregisterDemand
+    )
 export default router;

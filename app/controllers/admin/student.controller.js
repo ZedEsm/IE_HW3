@@ -227,4 +227,40 @@ export default class StudentController {
             );
         }
     }
+
+    static async deletePreregisterDemand(req, res) {
+        const id = req.params.id;
+        const courseId = req.params.course_id
+        try {
+            const data = await PREREGISTER.findById(id);
+            const courses_list = data.courses;
+            const isMatching = courses_list.some(obj => {
+                return obj._id == courseId
+
+            })
+            if (isMatching) {
+                const index = courses_list.indexOf(courseId);
+                if (index !== -1) {
+                    courses_list.splice(index, 1);
+                    data.courses = courses_list;
+                    await data.save();
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Preregistered Course Deleted Successfully"));
+                }
+            }
+
+            return res
+                .status(404)
+                .json(createResponse(false, "Preregistered Course not found"));
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while deleting the preregistered course."
+                )
+            );
+        }
+    }
 }
