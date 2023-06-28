@@ -269,13 +269,15 @@ export default class StudentController {
 
     static async getPreregistration(req, res) {
         try {
+            const preregistration_list = []
             const course_id = req.params.id
             const data = await PREREGISTER.find()
             for (let i = 0; i < data.length; i++) {
-                if(data[i].courses==course_id){
-                    return res.status(201).json(createResponse(true,"Get Preregistration Successfully ",data[i]))
+                if (data[i].courses == course_id) {
+                    preregistration_list.push(data[i])
                 }
             }
+            return res.status(201).json(createResponse(true,"Get Preregistration Successfully ",preregistration_list))
 
 
         } catch (err) {
