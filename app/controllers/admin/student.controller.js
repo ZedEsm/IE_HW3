@@ -8,6 +8,7 @@ const Student = db.students;
 const Role = db.roles;
 const ROLES = db.ROLES;
 const PREREGISTER = db.preregistration
+const SEMESTER_COURSE = db.semesterCourses
 
 const requiredStudentParams = [
     "full_name",
@@ -185,7 +186,9 @@ export default class StudentController {
                 student,
                 courses
             });
+
             const data = await preregistration.save(preregistration);
+
             res.status(201).json(
                 createResponse(true, "Preregistered Successfully!", data)
             );
@@ -261,6 +264,29 @@ export default class StudentController {
                     "Some error occurred while deleting the preregistered course."
                 )
             );
+        }
+    }
+
+    static async getPreregistration(req, res) {
+        try {
+            const course_id = req.params.id
+            const data = await PREREGISTER.find()
+            for (let i = 0; i < data.length; i++) {
+                if(data[i].courses==course_id){
+                    return res.status(201).json(createResponse(true,"Get Preregistration Successfully ",data[i]))
+                }
+            }
+
+
+        } catch (err) {
+            return res
+                .status(500)
+                .json(
+                    createResponse(
+                        false,
+                        err.message || `Could not get all Terms.`
+                    )
+                );
         }
     }
 }
