@@ -7,6 +7,7 @@ import existAllParams from "../../utils/exist-all-params.js";
 const SUPER = db.supervisor;
 const Role = db.roles;
 const ROLES = db.ROLES;
+const REGISTER = db.registration;
 
 const requiredSuperParams = [
     "full_name",
@@ -71,6 +72,31 @@ export default class SuperController {
                     "Some error occurred while creating the Supervisor."
                 )
             );
+        }
+    }
+
+    static async getRegistrations(req,res){
+        try {
+            const registration_list = []
+            const course_id = req.params.id
+            const data = await REGISTER.find()
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].courses == course_id) {
+                   registration_list.push(data[i])
+                }
+            }
+            return res.status(201).json(createResponse(true, "Get Registration Successfully ", registration_list))
+
+
+        } catch (err) {
+            return res
+                .status(500)
+                .json(
+                    createResponse(
+                        false,
+                        err.message || `Could not get all Registration.`
+                    )
+                );
         }
     }
 }

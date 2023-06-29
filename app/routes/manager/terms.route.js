@@ -90,4 +90,13 @@ router
     .route("/mert")
     .post([Auth.isAuthenticated, RoleHandler.isManager],
         visor.create)
+;
+router
+    .route("/course/:id/registrations")
+    .get(
+        [Auth.isAuthenticated,RoleHandler.isSupervisor],
+        visor.getRegistrations
+    );
+
+
 export default router;
