@@ -359,19 +359,37 @@ export default class StudentController {
 
     static async registerDemand(req, res) {
         try {
+            const term = req.params.id
             const student = req.user_id
+            const register = await TERM.findById(term)
             const {courses} =
                 req.body;
             const registration = new REGISTER({
                 student,
-                courses
+                courses,
+                term
             });
+            const registration_semester_course = register.registration_semester_course
+            for (const item1 of registration_semester_course) {
+                const strItem1 = String(item1);
+                for (const item2 of courses) {
+                    const strItem2 = String(item2);
+                    if (strItem1 === strItem2) {
+                        const data = await registration.save(registration);
+                        res.status(201).json(
+                            createResponse(true, "Registered Successfully!", data))
+                    } else {
+                        res.status(500).json(
+                            createResponse(
+                                false,
 
-            const data = await registration.save(registration);
+                                "Course Is Not In Registering List!"
+                            )
+                        );
+                    }
+                }
+            }
 
-            res.status(201).json(
-                createResponse(true, "Registered Successfully!", data)
-            );
         } catch (err) {
             res.status(500).json(
                 createResponse(
@@ -381,6 +399,7 @@ export default class StudentController {
                 )
             );
         }
+
     }
 
     static async deleteRegisteredCourse(req, res) {

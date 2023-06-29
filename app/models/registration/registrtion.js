@@ -8,8 +8,8 @@ export default (mongoose) => mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'semesterCourses',
         }],
-        // term: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "terms"
-        // },
+        term: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "terms"
+        },
     })

@@ -56,25 +56,25 @@ router
 router
     .route("/course/:id/preregistrations")
     .get(
-        [Auth.isAuthenticated,RoleHandler.isStudent],
+        [Auth.isAuthenticated,RoleHandler.isManagerOrStudent],
         StudentController.getPreregistration
-    );
-
-router
-    .route("/course/register")
-    .post(
-        [Auth.isAuthenticated,RoleHandler.isStudent],
-        StudentController.registerDemand
-
     );
 
 router
     .route("/course/register/:id")
     .post(
         [Auth.isAuthenticated,RoleHandler.isStudent],
-        StudentController.registerCourseById
+        StudentController.registerDemand
 
     );
+
+// router
+//     .route("/course/register/:id")
+//     .post(
+//         [Auth.isAuthenticated,RoleHandler.isStudent],
+//         StudentController.registerCourseById
+//
+//     );
 
 router
     .route("/course/register/:id")
