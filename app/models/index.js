@@ -12,6 +12,7 @@ import approvedCourses from "./courses/approved-course.model.js";
 import roles from "./roles/role.model.js";
 import term from "./terms/term.js";
 import preregistration from "./registration/preregistration.js";
+import registration from "./registration/registrtion.js";
 
 // config the database
 mongoose.Promise = global.Promise;
@@ -33,6 +34,7 @@ db.courses = courses(mongoose);
 db.approvedCourses = approvedCourses(mongoose);
 db.semesterCourses = semesterCourses(mongoose);
 db.preregistration = preregistration(mongoose);
+db.registration = registration(mongoose);
 
 // roles
 db.roles = roles(mongoose);

@@ -4,12 +4,13 @@ import db from "../../models/index.js";
 import createResponse from "../../utils/create-response.js";
 import existAllParams from "../../utils/exist-all-params.js";
 
+
 const Student = db.students;
 const Role = db.roles;
 const ROLES = db.ROLES;
 const PREREGISTER = db.preregistration
-const SEMESTER_COURSE = db.semesterCourses
-
+const REGISTER = db.registration
+const TERM = db.terms
 const requiredStudentParams = [
     "full_name",
     "user_id",
@@ -231,6 +232,42 @@ export default class StudentController {
         }
     }
 
+    static async preregisterCourseInSpecifiedTerm(req, res) {
+        try {
+            const term = req.params.id
+            const student = req.user_id
+            const preregister = await TERM.findById(term)
+            const {courses} =
+                req.body;
+            const preregistration = new PREREGISTER({
+                student,
+                courses,
+                term
+            });
+            const preregistration_semester_course = preregister.preregistration_semester_course
+            for (const item1 of preregistration_semester_course) {
+                const strItem1 = String(item1);
+                for (const item2 of courses) {
+                    const strItem2 = String(item2);
+                    if (strItem1 === strItem2) {
+                        const data = await preregistration.save(preregistration);
+                        res.status(201).json(
+                            createResponse(true, "Preregistered Successfully!", data))
+                    }
+                }
+            }
+
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while Preregistering."
+                )
+            );
+        }
+    }
+
     static async deletePreregisterDemand(req, res) {
         const id = req.params.id;
         const courseId = req.params.course_id
@@ -277,7 +314,7 @@ export default class StudentController {
                     preregistration_list.push(data[i])
                 }
             }
-            return res.status(201).json(createResponse(true,"Get Preregistration Successfully ",preregistration_list))
+            return res.status(201).json(createResponse(true, "Get Preregistration Successfully ", preregistration_list))
 
 
         } catch (err) {
@@ -286,9 +323,101 @@ export default class StudentController {
                 .json(
                     createResponse(
                         false,
-                        err.message || `Could not get all Terms.`
+                        err.message || `Could not get all Preregistration.`
                     )
                 );
         }
     }
+
+    static async registerCourseById(req, res) {
+        try {
+            const id = req.params.id
+            const student = req.user_id
+            const register = await REGISTER.findById(id)
+            if (register.student && student == register.student) {
+                const course_lst = register.courses;
+                course_lst.push(req.body.courses)
+                register.courses = course_lst;
+                await register.save()
+                res.status(201).json(createResponse(true, "Registered Course Successfully"))
+            } else {
+                res.status(400).json(
+                    createResponse(false, "Access Denied")
+                );
+            }
+
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while Registering."
+                )
+            );
+        }
+    }
+
+    static async registerDemand(req, res) {
+        try {
+            const student = req.user_id
+            const {courses} =
+                req.body;
+            const registration = new REGISTER({
+                student,
+                courses
+            });
+
+            const data = await registration.save(registration);
+
+            res.status(201).json(
+                createResponse(true, "Registered Successfully!", data)
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while Registering."
+                )
+            );
+        }
+    }
+
+    static async deleteRegisteredCourse(req, res) {
+        const id = req.params.id;
+        const courseId = req.params.course_id
+        try {
+            const data = await PREREGISTER.findById(id);
+            const courses_list = data.courses;
+            const isMatching = courses_list.some(obj => {
+                return obj._id == courseId
+
+            })
+            if (isMatching) {
+                const index = courses_list.indexOf(courseId);
+                if (index !== -1) {
+                    courses_list.splice(index, 1);
+                    data.courses = courses_list;
+                    await data.save();
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Preregistered Course Deleted Successfully"));
+                }
+            }
+
+            return res
+                .status(404)
+                .json(createResponse(false, "Preregistered Course not found"));
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while deleting the preregistered course."
+                )
+            );
+        }
+
+    }
+
 }

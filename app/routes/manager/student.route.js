@@ -20,33 +20,67 @@ router
         StudentController.getAllStudents
     );
 
+// router
+//     .route("/course/preregister/:id")
+//     .post(
+//         [Auth.isAuthenticated,RoleHandler.isStudent],
+//         StudentController.preregisterDemandById
+//
+//     );
+
 router
     .route("/course/preregister/:id")
     .post(
         [Auth.isAuthenticated,RoleHandler.isStudent],
-        StudentController.preregisterDemandById
+        StudentController.preregisterCourseInSpecifiedTerm
 
     );
-
-router
-    .route("/course/preregister")
-    .post(
-        [Auth.isAuthenticated,RoleHandler.isStudent],
-        StudentController.preregisterDemand
-
-    );
+// router
+//     .route("/course/preregister")
+//     .post(
+//         [Auth.isAuthenticated,RoleHandler.isStudent],
+//         StudentController.preregisterDemand
+//
+//     );
 
 router
     .route("/course/preregister/:id/:course_id")
     .delete(
         [Auth.isAuthenticated,RoleHandler.isStudent],
         StudentController.deletePreregisterDemand
-    )
+    );
+
+
+
 
 router
     .route("/course/:id/preregistrations")
     .get(
         [Auth.isAuthenticated,RoleHandler.isStudent],
         StudentController.getPreregistration
-    )
+    );
+
+router
+    .route("/course/register")
+    .post(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.registerDemand
+
+    );
+
+router
+    .route("/course/register/:id")
+    .post(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.registerCourseById
+
+    );
+
+router
+    .route("/course/register/:id")
+    .delete(
+        [Auth.isAuthenticated,RoleHandler.isStudent],
+        StudentController.deleteRegisteredCourse
+    );
 export default router;
+
