@@ -405,8 +405,9 @@ export default class StudentController {
     static async deleteRegisteredCourse(req, res) {
         const id = req.params.id;
         const courseId = req.params.course_id
+
         try {
-            const data = await PREREGISTER.findById(id);
+            const data = await REGISTER.findById(id);
             const courses_list = data.courses;
             const isMatching = courses_list.some(obj => {
                 return obj._id == courseId

@@ -77,10 +77,13 @@ router
 //     );
 
 router
-    .route("/course/register/:id")
+    .route("/course/register/:id/:course_id")
     .delete(
         [Auth.isAuthenticated,RoleHandler.isStudent],
         StudentController.deleteRegisteredCourse
     );
+
+router
+    .route("/term/:id/registrations")
 export default router;
 
