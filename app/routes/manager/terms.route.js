@@ -51,6 +51,13 @@ router
     );
 
 router
+    .route("/term/:id/preregistrations")
+    .get(
+        [Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
+        studentEducationalController.getPreregistrationOfTerm
+    );
+
+router
     .route("/term/:id/preregistration_courses")
     .get([Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
         studentEducationalController.getSCPreregistered

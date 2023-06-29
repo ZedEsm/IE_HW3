@@ -3,6 +3,7 @@ import createResponse from "../../utils/create-response.js";
 
 const Term = db.terms
 const ROLES = db.ROLES;
+const PREREGISTER = db.preregistration
 export default class studentEducationalController {
     static async getAllTerms(req, res) {
         if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
@@ -68,6 +69,26 @@ export default class studentEducationalController {
                 );
             }
         }
+
+    }
+
+    static async getPreregistrationOfTerm(req,res){
+        const term_id = req.params.id
+        PREREGISTER.find({ term: term_id })
+            .then((foundDocuments) => {
+                return res
+                    .status(200)
+                    .json(createResponse(true, "Get preregisterions  Successfully",foundDocuments));
+            })
+            .catch((err) => {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        err.message ||
+                        "Some error occurred while getting preregistrations."
+                    )
+                );
+            });
 
     }
 
