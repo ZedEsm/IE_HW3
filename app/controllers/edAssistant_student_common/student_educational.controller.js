@@ -6,7 +6,7 @@ const ROLES = db.ROLES;
 const PREREGISTER = db.preregistration
 export default class studentEducationalController {
     static async getAllTerms(req, res) {
-        if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
+        if (req.user_role === ROLES[1] || req.user_role === ROLES[3] || req.user_role === ROLES[4]) {
             try {
                 const data = await Term.find();
                 return res

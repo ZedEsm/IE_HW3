@@ -5,7 +5,6 @@ import RoleHandler from "../../middlewares/role.handler.js";
 
 const router = express.Router();
 
-
 router
     .route("/student/:id")
     .get(

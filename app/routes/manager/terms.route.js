@@ -2,8 +2,9 @@ import express from "express";
 import EducationAssistantController from "../../controllers/educational-assistant/educationAssistant.controller.js";
 import Auth from "../../middlewares/authentication.js";
 import RoleHandler from "../../middlewares/role.handler.js";
-import studentEducationalController from "../../controllers/edAssistant_student_common/student_educational.controller.js"
-
+import studentEducationalController
+    from "../../controllers/edAssistant_student_common/student_educational.controller.js"
+import visor from "../../controllers/admin/super.controller.js"
 
 const router = express.Router();
 
@@ -77,11 +78,12 @@ router
 
 router
     .route("/term/:id/registration_courses")
-    .get([Auth.isAuthenticated,RoleHandler.isManagerOrStudent],
+    .get([Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
         studentEducationalController.getSCRegistered)
 
 router
     .route("/term/:id/registration/:cid")
-    .delete([Auth.isAuthenticated,RoleHandler.isManager],
+    .delete([Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.deleteSCRegistration)
+;
 export default router;

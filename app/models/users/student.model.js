@@ -42,5 +42,11 @@ export default (mongoose) =>
                 ref: 'courses',
             }],
 
+            supervisor:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'supervisors',
+            },
+
+
         })
     );

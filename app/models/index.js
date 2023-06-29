@@ -13,6 +13,7 @@ import roles from "./roles/role.model.js";
 import term from "./terms/term.js";
 import preregistration from "./registration/preregistration.js";
 import registration from "./registration/registrtion.js";
+import supervisor from "./users/super.model.js"
 
 // config the database
 mongoose.Promise = global.Promise;
@@ -28,6 +29,7 @@ db.students = students(mongoose);
 db.professors = professors(mongoose);
 db.itManagers = itManagers(mongoose);
 db.educationManagers = educationManagers(mongoose);
+db.supervisor = supervisor(mongoose)
 
 // courses
 db.courses = courses(mongoose);
@@ -38,7 +40,7 @@ db.registration = registration(mongoose);
 
 // roles
 db.roles = roles(mongoose);
-db.ROLES = ["admin", "edu_manager", "professor", "student"];
+db.ROLES = ["admin", "edu_manager", "professor", "student","supervisor"];
 
 //terms
 db.terms = term(mongoose);
