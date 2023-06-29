@@ -440,4 +440,23 @@ export default class StudentController {
 
     }
 
+    static async getRegistrationsByTermId(req,res){
+        const term_id = req.params.id
+        REGISTER.find({ term: term_id })
+            .then((foundDocuments) => {
+                return res
+                    .status(200)
+                    .json(createResponse(true, "Get registrations  Successfully",foundDocuments));
+            })
+            .catch((err) => {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        err.message ||
+                        "Some error occurred while getting registrations."
+                    )
+                );
+            });
+    }
+
 }
