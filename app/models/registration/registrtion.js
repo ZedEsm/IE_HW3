@@ -1,3 +1,5 @@
+import Joi from "joi";
+
 export default (mongoose) => mongoose.model(
     "registration", {
         student: {
@@ -12,4 +14,8 @@ export default (mongoose) => mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "terms"
         },
+        confirmed: Joi
+            .boolean()
+            .required()
+
     })

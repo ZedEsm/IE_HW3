@@ -85,7 +85,7 @@ router
 router
     .route("/term/:id/registrations")
     .get(
-        [Auth.isAuthenticated,RoleHandler.isManagerOrStudentOrSupervisor],
+        [Auth.isAuthenticated,RoleHandler.isSupervisorOrStudent],
         StudentController.getRegistrationsByTermId
     )
 export default router;

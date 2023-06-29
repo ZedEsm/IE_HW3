@@ -97,6 +97,13 @@ router
         [Auth.isAuthenticated,RoleHandler.isSupervisor],
         visor.getRegistrations
     );
+router
+    .route("/registration/:id")
+    .put(
+        [Auth.isAuthenticated,RoleHandler.isSupervisor],
+           visor.confirmRegistration
+    );
+
 
 
 export default router;

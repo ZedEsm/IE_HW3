@@ -362,12 +362,13 @@ export default class StudentController {
             const term = req.params.id
             const student = req.user_id
             const register = await TERM.findById(term)
-            const {courses} =
+            const {courses,confirmed} =
                 req.body;
             const registration = new REGISTER({
                 student,
                 courses,
-                term
+                term,
+                confirmed
             });
             const registration_semester_course = register.registration_semester_course
             for (const item1 of registration_semester_course) {
@@ -440,23 +441,46 @@ export default class StudentController {
 
     }
 
-    static async getRegistrationsByTermId(req,res){
-        const term_id = req.params.id
-        REGISTER.find({ term: term_id })
-            .then((foundDocuments) => {
-                return res
-                    .status(200)
-                    .json(createResponse(true, "Get registrations  Successfully",foundDocuments));
-            })
-            .catch((err) => {
-                res.status(500).json(
-                    createResponse(
-                        false,
-                        err.message ||
-                        "Some error occurred while getting registrations."
-                    )
-                );
-            });
+    static async getRegistrationsByTermId(req, res) {
+        if(req.user_role == "supervisor"){
+            const term_id = req.params.id
+            REGISTER.find({term: term_id})
+                .then((foundDocuments) => {
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
+                })
+                .catch((err) => {
+                    res.status(500).json(
+                        createResponse(
+                            false,
+                            err.message ||
+                            "Some error occurred while getting registrations."
+                        )
+                    );
+                });
+        }
+        else {
+            const student_id = req.user_id
+            const term_id = req.params.id
+            REGISTER.find({student: student_id})
+                .then((foundDocuments) => {
+                 if(foundDocuments.some(obj=>String(obj.term)===term_id))
+                    return res
+                        .status(200)
+                        .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
+                })
+                .catch((err) => {
+                    res.status(500).json(
+                        createResponse(
+                            false,
+                            err.message ||
+                            "Some error occurred while getting registrations."
+                        )
+                    );
+                });
+        }
+
     }
 
 }

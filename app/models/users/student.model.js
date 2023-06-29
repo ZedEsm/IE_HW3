@@ -47,6 +47,17 @@ export default (mongoose) =>
                 ref: 'supervisors',
             },
 
-
+            term:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'terms'
+            }],
+            preregistration_semester_course:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'preregistration'
+            }],
+            registration_semester_course:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'registration'
+            }]
         })
     );

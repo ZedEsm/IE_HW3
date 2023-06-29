@@ -75,14 +75,14 @@ export default class SuperController {
         }
     }
 
-    static async getRegistrations(req,res){
+    static async getRegistrations(req, res) {
         try {
             const registration_list = []
             const course_id = req.params.id
             const data = await REGISTER.find()
             for (let i = 0; i < data.length; i++) {
                 if (data[i].courses == course_id) {
-                   registration_list.push(data[i])
+                    registration_list.push(data[i])
                 }
             }
             return res.status(201).json(createResponse(true, "Get Registration Successfully ", registration_list))
@@ -98,5 +98,33 @@ export default class SuperController {
                     )
                 );
         }
+    }
+
+    static async confirmRegistration(req, res) {
+        const student_id = req.params.id
+        let result = null
+            REGISTER.find({student: student_id})
+                .then(async (foundDocuments) => {
+                    for (let i = 0; i < foundDocuments.length; i++) {
+
+                        foundDocuments[i].confirmed = true
+                        result = foundDocuments[i]
+                        break
+                    }
+                    const data = await REGISTER.findByIdAndUpdate(result._id, { $set: { confirmed: true }} ,{
+                        useFindAndModify: true,
+                    });
+                    return res.status(201).json(createResponse(true,"Registration Confirmed",data))
+                })
+                .catch((err) => {
+                    res.status(500).json(
+                        createResponse(
+                            false,
+                            err.message ||
+                            "Some error occurred while getting registrations."
+                        )
+                    );
+                });
+
     }
 }

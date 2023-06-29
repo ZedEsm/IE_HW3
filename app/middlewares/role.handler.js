@@ -69,4 +69,13 @@ export default class RoleHandler {
                 .json(createResponse(false, "access denied!"));
         next();
     }
+
+    static async isSupervisorOrStudent(req,res,next){
+
+        if (req.user_role !== ROLES[3]  && req.user_role !== ROLES[4])
+            return res
+                .status(403)
+                .json(createResponse(false, "access denied!"));
+        next();
+    }
 }
