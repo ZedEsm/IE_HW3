@@ -100,7 +100,7 @@ router
 router
     .route("/registration/:id")
     .put(
-        [Auth.isAuthenticated,RoleHandler.isSupervisor],
+        [Auth.isAuthenticated,RoleHandler.isSupervisorOrManager],
            visor.confirmRegistration
     );
 

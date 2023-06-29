@@ -8,6 +8,7 @@ const SUPER = db.supervisor;
 const Role = db.roles;
 const ROLES = db.ROLES;
 const REGISTER = db.registration;
+const TERM = db.terms;
 
 const requiredSuperParams = [
     "full_name",
@@ -106,7 +107,6 @@ export default class SuperController {
             REGISTER.find({student: student_id})
                 .then(async (foundDocuments) => {
                     for (let i = 0; i < foundDocuments.length; i++) {
-
                         foundDocuments[i].confirmed = true
                         result = foundDocuments[i]
                         break
@@ -114,6 +114,10 @@ export default class SuperController {
                     const data = await REGISTER.findByIdAndUpdate(result._id, { $set: { confirmed: true }} ,{
                         useFindAndModify: true,
                     });
+                    await TERM.findByIdAndUpdate(result.term, { $set: { user_id:[req.user_id,result.student] }} ,{
+                        useFindAndModify: true,
+                    });
+
                     return res.status(201).json(createResponse(true,"Registration Confirmed",data))
                 })
                 .catch((err) => {
@@ -121,7 +125,7 @@ export default class SuperController {
                         createResponse(
                             false,
                             err.message ||
-                            "Some error occurred while getting registrations."
+                            "Some error occurred while confirmation."
                         )
                     );
                 });

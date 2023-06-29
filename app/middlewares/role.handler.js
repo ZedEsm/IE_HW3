@@ -28,6 +28,14 @@ export default class RoleHandler {
         next();
     }
 
+    static async isSupervisorOrManager(req,res,next){
+        if (req.user_role !== ROLES[4] && req.user_role !== ROLES[1])
+            return res
+                .status(403)
+                .json(createResponse(false, "access denied!"));
+        next();
+    }
+
 
     static async isProfessor(req, res, next) {
         if (req.user_role !== ROLES[2])
