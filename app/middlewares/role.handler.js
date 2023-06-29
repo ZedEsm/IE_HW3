@@ -20,6 +20,15 @@ export default class RoleHandler {
         next();
     }
 
+    static async isSupervisor(req, res, next) {
+        if (req.user_role !== ROLES[4])
+            return res
+                .status(403)
+                .json(createResponse(false, "access denied!"));
+        next();
+    }
+
+
     static async isProfessor(req, res, next) {
         if (req.user_role !== ROLES[2])
             return res
@@ -48,6 +57,13 @@ export default class RoleHandler {
     static async isManagerOrStudent(req,res,next){
 
         if (req.user_role !== ROLES[1] && req.user_role !== ROLES[3])
+            return res
+                .status(403)
+                .json(createResponse(false, "access denied!"));
+        next();
+    } static async isManagerOrStudentOrSupervisor(req,res,next){
+
+        if (req.user_role !== ROLES[1] && req.user_role !== ROLES[3]  && req.user_role !== ROLES[4])
             return res
                 .status(403)
                 .json(createResponse(false, "access denied!"));

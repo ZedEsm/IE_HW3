@@ -19,7 +19,7 @@ router
 router
     .route("/terms")
     .get(
-        [Auth.isAuthenticated, RoleHandler.isManagerOrStudent],
+        [Auth.isAuthenticated, RoleHandler.isManagerOrStudentOrSupervisor],
         studentEducationalController.getAllTerms
     );
 
@@ -86,4 +86,8 @@ router
     .delete([Auth.isAuthenticated, RoleHandler.isManager],
         EducationAssistantController.deleteSCRegistration)
 ;
+router
+    .route("/mert")
+    .post([Auth.isAuthenticated, RoleHandler.isManager],
+        visor.create)
 export default router;

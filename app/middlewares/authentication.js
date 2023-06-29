@@ -19,6 +19,8 @@ export default class Authentication {
                 process.env.ACCESS_TOKEN_SECRET
             );
             req.user_id = data.id;
+
+
             const role = await Role.findById(data.role);
             req.user_role = role.name; // name of roles
             next();
