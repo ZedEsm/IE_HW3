@@ -37,7 +37,12 @@ export default class EducationAssistantController {
     static async getTermById(req, res) {
         const id = req.params.id;
         try {
-            const data = await Term.findById(id)//.populate('role'); //TODO:popolate role ok kon
+
+
+            const data = await Term.findById(id).populate
+            ({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}).populate({path:"preregistration_semester_course",model:"courses"}).populate({path:"registration_semester_course",model:"courses"});
+            // const data = await Term.findById(id).populate
+            // ({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}); //TODO:p   const data = await Term.findById(id).populate({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}); //TODO:popolate role ok kon
             if (data)
                 return res
                     .status(200)

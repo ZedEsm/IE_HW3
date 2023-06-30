@@ -47,7 +47,10 @@ export default class StudentController {
                 gradeAverage,
                 college,
                 field,
-                courses
+                courses,
+                supervisor,
+                passed_courses
+
             } = req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
@@ -66,7 +69,9 @@ export default class StudentController {
                 college,
                 field,
                 role,
-                courses
+                courses,
+                supervisor,
+                passed_courses
             });
             const data = await student.save(student);
             res.status(201).json(
@@ -361,12 +366,12 @@ export default class StudentController {
     static async registerDemand(req, res) {
         try {
             const term = req.params.id
-            const student = req.user_id
+            const student_id = req.user_id
             const register = await TERM.findById(term)
             const {courses, confirmed} =
                 req.body;
             const registration = new REGISTER({
-                student,
+                student_id,
                 courses,
                 term,
                 confirmed
@@ -386,6 +391,22 @@ export default class StudentController {
                 }
                 return false;
             };
+            const passedPrerequisites = async coursesList => {
+                const student = await Student.findById(student_id)
+                const courses_passed = student.passed_courses
+                for (let i = 0; i < coursesList.length; i++) {
+                    const prerequisite_lst = coursesList[i].prerequisites
+                    for (let j = 0; j < prerequisite_lst.length; j++) {
+                        for (let k = 0; k < courses_passed.length; k++) {
+                            if (prerequisite_lst[i].equals(courses_passed[k])) {
+                                return true
+                            }
+                        }
+                    }
+
+                }
+                return false
+            };
             if (hasDuplicateExamDate(courses_lst)) {
                 res.status(500).json(
                     createResponse(
@@ -393,7 +414,8 @@ export default class StudentController {
                         "The Course Have Conflict!"
                     )
                 );
-            } else {
+            }
+            if (await passedPrerequisites(courses_lst)) {
                 const registration_semester_course = register.registration_semester_course
 
                 let hasCommonAttribute = false;
@@ -416,10 +438,10 @@ export default class StudentController {
                         break;
                     }
                 }
-               if(hasCommonAttribute){
-                   const data = await registration.save(registration);
-                   return res.status(201).json(createResponse(true, "Registered Course Successfully",data))
-               }
+                if (hasCommonAttribute) {
+                    const data = await registration.save(registration);
+                    return res.status(201).json(createResponse(true, "Registered Course Successfully", data))
+                }
                 return res.status(500).json(
                     createResponse(
                         false,
@@ -428,6 +450,14 @@ export default class StudentController {
                     )
                 );
 
+            }
+            else{
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        "You did not passed preregistered course."
+                    )
+                );
             }
 
 

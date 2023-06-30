@@ -8,7 +8,7 @@ export default class studentEducationalController {
     static async getAllTerms(req, res) {
         if (req.user_role === ROLES[1] || req.user_role === ROLES[3] || req.user_role === ROLES[4]) {
             try {
-                const data = await Term.find().populate("semester_courses");
+                const data = await Term.find()
                 return res
                     .status(200)
                     .json(createResponse(true, "get all terms", data));

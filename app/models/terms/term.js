@@ -17,6 +17,7 @@ export default (mongoose) => mongoose.model(
         registration_semester_course: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'semesterCourses',
-        }]
+        }],
+
     })
 )
