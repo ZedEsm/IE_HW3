@@ -11,6 +11,7 @@ const ROLES = db.ROLES;
 const PREREGISTER = db.preregistration
 const REGISTER = db.registration
 const TERM = db.terms
+const COURSES = db.courses
 const requiredStudentParams = [
     "full_name",
     "user_id",
@@ -362,7 +363,7 @@ export default class StudentController {
             const term = req.params.id
             const student = req.user_id
             const register = await TERM.findById(term)
-            const {courses,confirmed} =
+            const {courses, confirmed} =
                 req.body;
             const registration = new REGISTER({
                 student,
@@ -370,29 +371,68 @@ export default class StudentController {
                 term,
                 confirmed
             });
-            const registration_semester_course = register.registration_semester_course
-            for (const item1 of registration_semester_course) {
-                const strItem1 = String(item1);
-                for (const item2 of courses) {
-                    const strItem2 = String(item2);
-                    if (strItem1 === strItem2) {
-                        const data = await registration.save(registration);
-                        res.status(201).json(
-                            createResponse(true, "Registered Successfully!", data))
-                    } else {
-                        res.status(500).json(
-                            createResponse(
-                                false,
-
-                                "Course Is Not In Registering List!"
-                            )
-                        );
+            let courses_lst = []
+            for (let i = 0; i < courses.length; i++) {
+                const course = await COURSES.findById(courses[i])
+                courses_lst.push(course)
+            }
+            const hasDuplicateExamDate = coursesList => {
+                for (let i = 0; i < coursesList.length - 1; i++) {
+                    for (let j = i + 1; j < coursesList.length; j++) {
+                        if (coursesList[i].examDate === coursesList[j].examDate) {
+                            return true;
+                        }
                     }
                 }
+                return false;
+            };
+            if (hasDuplicateExamDate(courses_lst)) {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        "The Course Have Conflict!"
+                    )
+                );
+            } else {
+                const registration_semester_course = register.registration_semester_course
+
+                let hasCommonAttribute = false;
+
+                for (let i = 0; i < registration_semester_course.length; i++) {
+                    const item1 = registration_semester_course[i];
+                    const strItem1 = String(item1);
+
+                    for (let j = 0; j < courses.length; j++) {
+                        const item2 = courses[j];
+                        const strItem2 = String(item2);
+
+                        if (strItem1 === strItem2) {
+                            hasCommonAttribute = true;
+                            break;
+                        }
+                    }
+
+                    if (hasCommonAttribute) {
+                        break;
+                    }
+                }
+               if(hasCommonAttribute){
+                   const data = await registration.save(registration);
+                   return res.status(201).json(createResponse(true, "Registered Course Successfully",data))
+               }
+                return res.status(500).json(
+                    createResponse(
+                        false,
+
+                        "Some error occurred while Registering."
+                    )
+                );
+
             }
 
+
         } catch (err) {
-            res.status(500).json(
+            return res.status(500).json(
                 createResponse(
                     false,
                     err.message ||
@@ -400,6 +440,7 @@ export default class StudentController {
                 )
             );
         }
+
 
     }
 
@@ -442,7 +483,7 @@ export default class StudentController {
     }
 
     static async getRegistrationsByTermId(req, res) {
-        if(req.user_role == "supervisor"){
+        if (req.user_role == "supervisor") {
             const term_id = req.params.id
             REGISTER.find({term: term_id})
                 .then((foundDocuments) => {
@@ -459,16 +500,15 @@ export default class StudentController {
                         )
                     );
                 });
-        }
-        else {
+        } else {
             const student_id = req.user_id
             const term_id = req.params.id
             REGISTER.find({student: student_id})
                 .then((foundDocuments) => {
-                 if(foundDocuments.some(obj=>String(obj.term)===term_id))
-                    return res
-                        .status(200)
-                        .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
+                    if (foundDocuments.some(obj => String(obj.term) === term_id))
+                        return res
+                            .status(200)
+                            .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
                 })
                 .catch((err) => {
                     res.status(500).json(
