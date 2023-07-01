@@ -30,63 +30,58 @@ export default class studentEducationalController {
 
 
 
-//     static async getSCPreregisteredByCourseName(req, res) {
-//         const DEFAULT_PAGE_SIZE = 10;
-//         if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
-//             const id = req.params.id;
-//             const courseName = req.query.courseName;
-//             const course_id = req.query.objectId;
-//             const page = parseInt(req.query.page) || 1;
-//             const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
-//
-//             try {
-//                 const data = await Term.findById(id).populate({
-//                     path: "preregistration_semester_course",
-//                     model: "courses",
-//                 });
-//
-//                 let courseFound = null;
-//                 if (courseName) {
-//                     courseFound = data.preregistration_semester_course.find(
-//                         (item) => item.courseName === courseName
-//                     );
-//                 } else if (course_id) {
-//                     const objectIdStr = course_id.toString();
-//                     data.preregistration_semester_course.some((item) => {
-//                         const itemIdStr = item._id.toString();
-//                         if (itemIdStr === objectIdStr) {
-//                             courseFound = item;
-//                         }
-//                     });
-//                 }
-//
-//                 let paginatedCourseFound = courseFound;
-//                 if (courseFound) {
-// console.log(courseFound)
-//                         const startIndex = (page - 1) * pageSize;
-//                         const endIndex = startIndex + pageSize;
-//                         paginatedCourseFound = courseFound.slice(startIndex, endIndex);
-//
-//                 }
-//
-//                 return res.status(200).json(
-//                     createResponse(
-//                         true,
-//                         "Get All Preregistration Semester Course",
-//                         paginatedCourseFound
-//                     )
-//                 );
-//             } catch (err) {
-//                 res.status(500).json(
-//                     createResponse(
-//                         false,
-//                         err.message ||
-//                         "Some error occurred while getting preregistration semester course."
-//                     )
-//                 );
-//             }
-//         }
-//     }
+    static async getSCPreregisteredByCourseName(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
+        if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
+            const id = req.params.id;
+            const courseName = req.query.courseName;
+            const course_id = req.query.id;
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+
+            try {
+                const data = await Term.findById(id).populate({
+                    path: "preregistration_semester_course",
+                    model: "courses",
+                });
+
+                let courseFound = null;
+                if (courseName) {
+                    courseFound = data.preregistration_semester_course.filter(
+                        (item) => item.courseName === courseName
+                    );
+                } else if (course_id) {
+                    courseFound = data.preregistration_semester_course.filter(
+                        (item) =>   item._id.toString() === course_id.toString()
+                   );
+
+                }
+                let paginatedCourseFound = courseFound;
+                if (courseFound) {
+                        const startIndex = (page - 1) * pageSize;
+                        const endIndex = startIndex + pageSize;
+                        paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+                }
+
+
+                return res.status(200).json(
+                    createResponse(
+                        true,
+                        "Get All Preregistration Semester Course",
+                        paginatedCourseFound
+                    )
+                );
+            } catch (err) {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        err.message ||
+                        "Some error occurred while getting preregistration semester course."
+                    )
+                );
+            }
+        }
+    }
 
 
 
@@ -141,25 +136,81 @@ export default class studentEducationalController {
 
     }
 
+    //exercise 3
+    // static async getSCRegistered(req, res) {
+    //     if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
+    //         const id = req.params.id
+    //         try {
+    //             const data = await Term.findById(id);
+    //             const registration_semester_course_list = data.registration_semester_course;
+    //             return res
+    //                 .status(200)
+    //                 .json(createResponse(true, "Get All Registration Semester Course", registration_semester_course_list));
+    //         } catch (err) {
+    //             res.status(500).json(
+    //                 createResponse(
+    //                     false,
+    //                     err.message ||
+    //                     "Some error occurred while getting registration semester course."
+    //                 )
+    //             );
+    //         }
+    //
+    //     }
+    //
+    // }
+
+    //project
     static async getSCRegistered(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
-            const id = req.params.id
+            const id = req.params.id;
+            const courseName = req.query.courseName;
+            const course_id = req.query.id;
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+
             try {
-                const data = await Term.findById(id);
-                const registration_semester_course_list = data.registration_semester_course;
-                return res
-                    .status(200)
-                    .json(createResponse(true, "Get All Registration Semester Course", registration_semester_course_list));
+                const data = await Term.findById(id).populate({
+                    path: "registration_semester_course",
+                    model: "courses",
+                });
+
+                let courseFound = null;
+                if (courseName) {
+                    courseFound = data.registration_semester_course.filter(
+                        (item) => item.courseName === courseName
+                    );
+                } else if (course_id) {
+                    courseFound = data.registration_semester_course.filter(
+                        (item) =>   item._id.toString() === course_id.toString()
+                    );
+
+                }
+                let paginatedCourseFound = courseFound;
+                if (courseFound) {
+                    const startIndex = (page - 1) * pageSize;
+                    const endIndex = startIndex + pageSize;
+                    paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+                }
+
+
+                return res.status(200).json(
+                    createResponse(
+                        true,
+                        "Get All Registration Semester Course",
+                        paginatedCourseFound
+                    )
+                );
             } catch (err) {
                 res.status(500).json(
                     createResponse(
                         false,
                         err.message ||
-                        "Some error occurred while getting registration semester course."
+                        "Some error occurred while getting Registration semester course."
                     )
                 );
             }
-
         }
 
     }
