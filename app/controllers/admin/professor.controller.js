@@ -200,4 +200,61 @@ export default class ProfessorController {
                 );
         }
     }
+
+    static async createListOfProfessors(req, res) {
+        if (!existAllParams(requiredProfessorParams, req.body)) {
+            return res
+                .status(400)
+                .json(createResponse(true, "Content is incomplete!"));
+        }
+        // Save Professors in the database
+        try {
+            const professorsData = req.body.professors; // Assuming professorsData is an array of professor objects
+            const professors = [];
+            for (const professorData of professorsData) {
+                const {
+                    full_name,
+                    user_id,
+                    password,
+                    email,
+                    phone,
+                    college,
+                    field,
+                    rank,
+                } = professorData;
+                const password_hash = await hash(password, 10); // hash the password with salt round 10
+
+                const role = await Role.findOne({ name: ROLES[2] });
+
+                const professor = new Professor({
+                    full_name,
+                    user_id,
+                    password_hash,
+                    email,
+                    phone,
+                    college,
+                    field,
+                    rank,
+                    role,
+                });
+                professors.push(professor);
+            }
+            const data = await Professor.insertMany(professors);
+            res.status(201).json(
+                createResponse(
+                    true,
+                    "Professors Created Successfully!",
+                    data
+                )
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message ||
+                    "Some error occurred while creating the Professors."
+                )
+            );
+        }
+    }
 }

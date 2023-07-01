@@ -28,10 +28,10 @@ export default (mongoose) =>
             educationSemester: Joi
                 .string()
                 .trim(),
-            preregistration:[{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'preregistration',
-            }]
+            // preregistration:[{
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     ref: 'preregistration',
+            // }]
 
         })
     );

@@ -157,13 +157,15 @@ export default class EducationAssistantController {
         try {
             const data = await Term.findById(id);
             const registration_semester_course_list = data.registration_semester_course;
-            registration_semester_course_list.push(req.body.registration_semester_course);
-            data.registration_semester_course = registration_semester_course_list;
-            await data.save();
+            const course_registration =  req.body.registration_semester_course
+            for (let i = 0; i <course_registration.length ; i++) {
+               registration_semester_course_list.push(course_registration[i]);
+                data.registration_semester_course = registration_semester_course_list;
+                await data.save();
+            }
             return res
                 .status(200)
                 .json(createResponse(true, "semester course registered Successfully"));
-
         } catch (err) {
             res.status(500).json(
                 createResponse(
