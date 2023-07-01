@@ -1,5 +1,6 @@
 import db from "../../models/index.js";
 import createResponse from "../../utils/create-response.js";
+import mongoose from "mongoose";
 
 const Term = db.terms
 const ROLES = db.ROLES;
@@ -30,15 +31,27 @@ export default class studentEducationalController {
         if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
             const id = req.params.id
             const courseName = req.query.courseName
+            const course_id = req.query.objectId
             try {
                 const data = await Term.findById(id).populate({
                     path: "preregistration_semester_course",
                     model: "courses"
                 });
-
                 let courseFound = null
                 if (courseName)
                     courseFound = data.preregistration_semester_course.find((item) => item.courseName === courseName);
+                else if (course_id) {
+                    const objectIdStr = course_id.toString();
+                   data.preregistration_semester_course.some((item) => {
+                        const itemIdStr = item._id.toString();
+                       if(itemIdStr === objectIdStr ){
+                           courseFound = item
+                       }
+                    });
+
+
+                }
+
 
                 return res
                     .status(200)
@@ -55,6 +68,8 @@ export default class studentEducationalController {
         }
 
     }
+
+
 
 
     static async providingSCPreregistration(req, res) {
