@@ -27,7 +27,7 @@ const requiredStudentParams = [
 ];
 
 export default class StudentController {
-    static async create(req, res) {
+    static async createOneStudent(req, res) {
         if (!existAllParams(requiredStudentParams, req.body)) {
             return res
                 .status(400)
@@ -87,6 +87,74 @@ export default class StudentController {
             );
         }
     }
+
+    static async create(req, res) {
+        if (!Array.isArray(req.body) || req.body.length === 0) {
+            return res
+                .status(400)
+                .json(createResponse(true, "Invalid or empty student list!"));
+        }
+
+        const createdStudents = [];
+
+        try {
+            for (const studentData of req.body) {
+                const {
+                    full_name,
+                    user_id,
+                    password,
+                    email,
+                    phone,
+                    degree,
+                    incomingYear,
+                    incomingSemester,
+                    gradeAverage,
+                    college,
+                    field,
+                    courses,
+                    supervisor,
+                    passed_courses
+                } = studentData;
+
+                const password_hash = await hash(password, 10);
+
+                const role = await Role.findOne({ name: ROLES[3] });
+
+                const student = new Student({
+                    full_name,
+                    user_id,
+                    password_hash,
+                    email,
+                    phone,
+                    degree,
+                    incomingYear,
+                    incomingSemester,
+                    gradeAverage,
+                    college,
+                    field,
+                    role,
+                    courses,
+                    supervisor,
+                    passed_courses
+                });
+
+                const createdStudent = await student.save();
+                createdStudents.push(createdStudent);
+            }
+
+            res.status(201).json(
+                createResponse(true, "Students Created Successfully!", createdStudents)
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message || "Some error occurred while creating the students."
+                )
+            );
+        }
+    }
+
 
     static async update(req, res) {
         if (!Object.keys(req.body).length) {
