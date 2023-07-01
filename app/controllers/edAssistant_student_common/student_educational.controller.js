@@ -26,48 +26,68 @@ export default class studentEducationalController {
         }
     }
 
-    //search based on courseName
-    static async getSCPreregisteredByCourseName(req, res) {
-        if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
-            const id = req.params.id
-            const courseName = req.query.courseName
-            const course_id = req.query.objectId
-            try {
-                const data = await Term.findById(id).populate({
-                    path: "preregistration_semester_course",
-                    model: "courses"
-                });
-                let courseFound = null
-                if (courseName)
-                    courseFound = data.preregistration_semester_course.find((item) => item.courseName === courseName);
-                else if (course_id) {
-                    const objectIdStr = course_id.toString();
-                   data.preregistration_semester_course.some((item) => {
-                        const itemIdStr = item._id.toString();
-                       if(itemIdStr === objectIdStr ){
-                           courseFound = item
-                       }
-                    });
 
 
-                }
 
 
-                return res
-                    .status(200)
-                    .json(createResponse(true, "Get All Preregistration Semester Course", courseFound));
-            } catch (err) {
-                res.status(500).json(
-                    createResponse(
-                        false,
-                        err.message ||
-                        "Some error occurred while getting preregistration semester course."
-                    )
-                );
-            }
-        }
+//     static async getSCPreregisteredByCourseName(req, res) {
+//         const DEFAULT_PAGE_SIZE = 10;
+//         if (req.user_role === ROLES[1] || req.user_role === ROLES[3]) {
+//             const id = req.params.id;
+//             const courseName = req.query.courseName;
+//             const course_id = req.query.objectId;
+//             const page = parseInt(req.query.page) || 1;
+//             const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+//
+//             try {
+//                 const data = await Term.findById(id).populate({
+//                     path: "preregistration_semester_course",
+//                     model: "courses",
+//                 });
+//
+//                 let courseFound = null;
+//                 if (courseName) {
+//                     courseFound = data.preregistration_semester_course.find(
+//                         (item) => item.courseName === courseName
+//                     );
+//                 } else if (course_id) {
+//                     const objectIdStr = course_id.toString();
+//                     data.preregistration_semester_course.some((item) => {
+//                         const itemIdStr = item._id.toString();
+//                         if (itemIdStr === objectIdStr) {
+//                             courseFound = item;
+//                         }
+//                     });
+//                 }
+//
+//                 let paginatedCourseFound = courseFound;
+//                 if (courseFound) {
+// console.log(courseFound)
+//                         const startIndex = (page - 1) * pageSize;
+//                         const endIndex = startIndex + pageSize;
+//                         paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+//
+//                 }
+//
+//                 return res.status(200).json(
+//                     createResponse(
+//                         true,
+//                         "Get All Preregistration Semester Course",
+//                         paginatedCourseFound
+//                     )
+//                 );
+//             } catch (err) {
+//                 res.status(500).json(
+//                     createResponse(
+//                         false,
+//                         err.message ||
+//                         "Some error occurred while getting preregistration semester course."
+//                     )
+//                 );
+//             }
+//         }
+//     }
 
-    }
 
 
 
