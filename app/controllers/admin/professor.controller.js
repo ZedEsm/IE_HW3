@@ -20,7 +20,7 @@ const requiredProfessorParams = [
 ];
 
 export default class ProfessorController {
-    static async create(req, res) {
+    static async createOneProfessor(req, res) {
         if (!existAllParams(requiredProfessorParams, req.body)) {
             return res
                 .status(400)
@@ -67,6 +67,73 @@ export default class ProfessorController {
             );
         }
     }
+    static async create(req, res) {
+        try {
+            const professorsData = req.body;
+
+            if (!Array.isArray(professorsData) || professorsData.length === 0) {
+                return res
+                    .status(400)
+                    .json(createResponse(true, "No professors data found in the request!"));
+            }
+
+            const professorsToCreate = [];
+
+            // Validate each professor object in the array
+            for (const professorData of professorsData) {
+                if (!existAllParams(requiredProfessorParams, professorData)) {
+                    return res
+                        .status(400)
+                        .json(createResponse(true, "Content is incomplete for one or more professors!"));
+                }
+
+                const {
+                    full_name,
+                    user_id,
+                    password,
+                    email,
+                    phone,
+                    college,
+                    field,
+                    rank,
+                } = professorData;
+
+                const password_hash = await hash(password, 10);
+
+                const role = await Role.findOne({ name: ROLES[2] });
+
+                const professor = new Professor({
+                    full_name,
+                    user_id,
+                    password_hash,
+                    email,
+                    phone,
+                    college,
+                    field,
+                    rank,
+                    role,
+                });
+
+                professorsToCreate.push(professor);
+            }
+
+            // Save all professors in the database
+            const createdProfessors = await Professor.insertMany(professorsToCreate);
+
+            res.status(201).json(
+                createResponse(true, "Professors Created Successfully!", createdProfessors)
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message || "Some error occurred while creating the professors."
+                )
+            );
+        }
+    }
+
+
 
     static async update(req, res) {
         if (!Object.keys(req.body).length) {
