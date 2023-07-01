@@ -450,8 +450,7 @@ export default class StudentController {
                     )
                 );
 
-            }
-            else{
+            } else {
                 res.status(500).json(
                     createResponse(
                         false,

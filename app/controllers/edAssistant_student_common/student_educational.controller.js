@@ -52,10 +52,13 @@ export default class studentEducationalController {
             try {
                 const data = await Term.findById(id);
                 const preregistration_semester_course_list = data.preregistration_semester_course;
-                preregistration_semester_course_list.push(req.body.preregistration_semester_course);
-                data.preregistration_semester_course = preregistration_semester_course_list;
-                await data.save();
-                return res
+                const course_preregistration =  req.body.preregistration_semester_course
+                for (let i = 0; i <course_preregistration.length ; i++) {
+                    preregistration_semester_course_list.push(course_preregistration[i]);
+                    data.preregistration_semester_course = preregistration_semester_course_list;
+                    await data.save();
+                }
+               return res
                     .status(200)
                     .json(createResponse(true, "semester course preregistered Successfully"));
 
