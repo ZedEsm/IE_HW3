@@ -379,16 +379,33 @@ export default class StudentController {
     }
 
     static async getPreregistration(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         try {
             const preregistration_list = []
             const course_id = req.params.id
-            const data = await PREREGISTER.find()
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+            const examLocation = req.query.examLocation;
+            const data = await PREREGISTER.find().populate({path:"courses",model:"semesterCourses"})
+            let courseFound = null;
+
             for (let i = 0; i < data.length; i++) {
-                if (data[i].courses == course_id) {
-                    preregistration_list.push(data[i])
-                }
+
+                let z = data[i].courses
+                for (let j = 0; j <z.length ; j++) {
+                    if (z[j]._id == course_id && z[j].examLocation == examLocation) {
+                       preregistration_list.push(data[i])
+                     }
+                }//TODO
             }
-            return res.status(201).json(createResponse(true, "Get Preregistration Successfully ", preregistration_list))
+            let paginatedCourseFound = preregistration_list;
+            if (preregistration_list) {
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                paginatedCourseFound = preregistration_list.slice(startIndex, endIndex);
+            }
+
+            return res.status(201).json(createResponse(true, "Get Preregistration Successfully ", paginatedCourseFound))
 
 
         } catch (err) {
