@@ -208,11 +208,30 @@ export default class StudentController {
     }
 
     static async getAllStudents(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         try {
+            const student_name = req.query.studentName;
+            let courseFound = null
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
             const data = await Student.find().populate('role');
+
+            if (student_name) {
+                courseFound = data.filter(
+                    (item) => item.full_name === student_name
+                );
+            }
+
+            let paginatedCourseFound = courseFound;
+            if (courseFound) {
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+            }
+
             return res
                 .status(200)
-                .json(createResponse(true, "get all students", data));
+                .json(createResponse(true, "get all students", paginatedCourseFound));
         } catch (err) {
             return res
                 .status(500)
@@ -387,7 +406,6 @@ export default class StudentController {
             const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
             const examLocation = req.query.examLocation;
             const data = await PREREGISTER.find().populate({path:"courses",model:"semesterCourses"})
-            let courseFound = null;
 
             for (let i = 0; i < data.length; i++) {
 
