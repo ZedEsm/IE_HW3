@@ -220,18 +220,37 @@ export default class ProfessorController {
     }
 
     static async getAllProfessors(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         try {
+            const professor_name = req.query.profName;
+            let courseFound = null
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
             const data = await Professor.find().populate('role');
+            courseFound = data
+            if (professor_name) {
+                courseFound = data.filter(
+                    (item) => item.full_name === professor_name
+                );
+            }
+
+            let paginatedCourseFound = courseFound;
+            if (courseFound) {
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+            }
+
             return res
                 .status(200)
-                .json(createResponse(true, "get all professors", data));
+                .json(createResponse(true, "get all students", paginatedCourseFound));
         } catch (err) {
             return res
                 .status(500)
                 .json(
                     createResponse(
                         false,
-                        err.message || `Could not get all Professors.`
+                        err.message || `Could not get all Students.`
                     )
                 );
         }

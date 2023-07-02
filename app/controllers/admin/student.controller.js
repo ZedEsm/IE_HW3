@@ -215,7 +215,7 @@ export default class StudentController {
             const page = parseInt(req.query.page) || 1;
             const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
             const data = await Student.find().populate('role');
-
+            courseFound = data
             if (student_name) {
                 courseFound = data.filter(
                     (item) => item.full_name === student_name
