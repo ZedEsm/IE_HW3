@@ -4,7 +4,6 @@ import db from "../models/index.js";
 import {compare} from "bcrypt";
 import createResponse from "../utils/create-response.js";
 import existAllParams from "../utils/exist-all-params.js";
-import revokedTokens from "lodash";
 
 const users = db.users;
 const requiredLoginParams = ["user_id", "password"];
@@ -48,24 +47,19 @@ export default class LoginController {
         );
     }
 
-    static async logout(req, res) {
-        // if(req.headers && req.headers.authorization)
-        // {
-        //     res.status(204).json(createResponse(true,"log out ;)"))
-        //     console.log("bye")
-        // }
-
-            // const authHeader = req.headers["authorization"];
-            // jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
-            //
-            //     if (logout) {
-            //         res.send({msg : 'You have been Logged Out' });
-            //     } else {
-            //         res.send({msg:'Error'});
-            //     }
-            // });
-
-
-    }
+    // static async logout(req, res) {
+    //
+    //         const authHeader = req.headers["authorization"];
+    //         jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
+    //
+    //             if (logout) {
+    //                 res.send({msg : 'You have been Logged Out' });
+    //             } else {
+    //                 res.send({msg:'Error'});
+    //             }
+    //         });
+    //
+    //
+    // }
 
 }

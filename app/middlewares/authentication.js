@@ -7,6 +7,7 @@ const Role = db.roles;
 
 export default class Authentication {
     static async isAuthenticated(req, res, next) {
+
         const token = req.headers["authorization"]?.split(" ")[1];
         if (!token)
             return res
@@ -22,6 +23,7 @@ export default class Authentication {
 
 
             const role = await Role.findById(data.role);
+
             req.user_role = role.name; // name of roles
             next();
         } catch (err) {
