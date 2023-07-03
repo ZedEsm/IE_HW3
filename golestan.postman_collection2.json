@@ -1,0 +1,2364 @@
+{
+	"info": {
+		"_postman_id": "e6dcd84b-f92f-4888-ab7d-f6a8f1dfd7c9",
+		"name": "golestan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25701487"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "post-auth-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"password\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTA1NTg1NWU5ZWMxODQ0YjIzNWIwNCIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODgzMTY1ODksImV4cCI6MTY4ODU3NTc4OX0.2Yajjgxyl4uqOSpjk_2a_1jU5zEwva0cN9sdn4xMNm8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTA1NTg1NWU5ZWMxODQ0YjIzNWIwNCIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODgzMDQyMDQsImV4cCI6MTY4ODU2MzQwNH0.9N7Irwgig8E37SzkgKiydpc8GR-cUH8G_sjd-PM7tdE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create admin",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Saeed Zare\",\r\n    \"user_id\": 1,\r\n    \"password\": \"1\",\r\n    \"email\": \"dasd@gmail.com\",\r\n    \"phone\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/6494964c88db5446b9311cef",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"6494964c88db5446b9311cef"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "professors",
+					"item": [
+						{
+							"name": "Update Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWMxMGZmMzkzYTNkMDRkOWJhZDFkZSIsInJvbGUiOiI2NDVjN2ZiYjljYTlhYTJkMTQ1MmQ1NTQiLCJpYXQiOjE2ODM3OTEwMjEsImV4cCI6MTY4NDA1MDIyMX0.MkVLeAMUqHMscktbgtKB1dze2z5TTbOxAk5D4HTprSA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "access-token",
+										"value": "eyJhbGciOiJIUzI1NiJ9.OTkyNDMwNTM.m_MvipL3dgPAFfofz6VwLpXAmLAVskEMcoU3MGppQco",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"college\": \"CE\",\r\n    \"field\": \"Computer\",\r\n    \"rank\": \"full\",\r\n    \"full_name\": \"Mohammad Zare\",\r\n    \"user_id\": \"45632\",\r\n    \"password\": \"123456789\",\r\n    \"email\": \"Saeed1381@gmail.com\",\r\n    \"phone\": \"09140887539\",\r\n    \"courses\": [\"645c82e9274128a7f12f0dad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/645c9bd2a2049bc43a5ae661",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										"645c9bd2a2049bc43a5ae661"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Profeesor by user_id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/Professor/64482e91811859154579de9a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor",
+										"64482e91811859154579de9a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Professors",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwODUxNmUyMWQ1OTIxZjMwNTRmYyIsInJvbGUiOiI2NGEyMDdlODZlMjFkNTkyMWYzMDU0ZWQiLCJpYXQiOjE2ODgzNTc0MzksImV4cCI6MTY4ODYxNjYzOX0.h3zTOb9D834qPveFEi-P_rFJqStHcNXs8ZchHSljj5I",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/admin/Professors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"Professors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Professor with user_id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwODUxNmUyMWQ1OTIxZjMwNTRmYyIsInJvbGUiOiI2NGEyMDdlODZlMjFkNTkyMWYzMDU0ZWQiLCJpYXQiOjE2ODgzNTc0MzksImV4cCI6MTY4ODYxNjYzOX0.h3zTOb9D834qPveFEi-P_rFJqStHcNXs8ZchHSljj5I",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/admin/Professor/64a208676e21d5921f305501",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"Professor",
+										"64a208676e21d5921f305501"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTYxMjUyZjMyZjk4MzkyOWU4OCIsInJvbGUiOiI2NDk0OThlZTI1MmYzMmY5ODM5MjllN2MiLCJpYXQiOjE2ODgyMjU2NDUsImV4cCI6MTY4ODQ4NDg0NX0.vfNM2muqu4KavSQVJSCfO1rT-k2r1noRRMRP4NFHM5g",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\r\n            \"full_name\": \"Neshati\",\r\n            \"user_id\": 5,\r\n            \"password\": \"5\",\r\n            \"email\": \"mneshati@gmail.com\",\r\n            \"phone\": \"0912000\",\r\n            \"college\": \"CE\",\r\n            \"field\": \"CE\",\r\n            \"rank\": \"prof\"\r\n},\r\n{\r\n            \"full_name\": \"Safaee\",\r\n            \"user_id\": 3,\r\n            \"password\": \"3\",\r\n            \"email\": \"safaee@gmail.com\",\r\n            \"phone\": \"0912000\",\r\n            \"college\": \"CE\",\r\n            \"field\": \"CE\",\r\n            \"rank\": \"prof\"\r\n}]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/Professor",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"Professor"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "students",
+					"item": [
+						{
+							"name": "Create List Of Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwODUxNmUyMWQ1OTIxZjMwNTRmYyIsInJvbGUiOiI2NGEyMDdlODZlMjFkNTkyMWYzMDU0ZWQiLCJpYXQiOjE2ODgzNDA4NjEsImV4cCI6MTY4ODYwMDA2MX0.sgdNOKGrK3dJU6Lfv3YQJmGAC2IZ85jfJYhqTUSqS4k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\r\n    \"full_name\": \"Nima\",\r\n    \"user_id\": 9,\r\n    \"password\": \"8\",\r\n    \"email\": \"nimam@gmail.com\",\r\n    \"phone\": \"8\",\r\n    \"degree\": \"ab\", \r\n    \"incomingYear\": 1399, \r\n    \"incomingSemester\": 1399, \r\n    \"gradeAverage\": 18.5, \r\n    \"college\": \"CE\", \r\n    \"field\": \"CE\",\r\n    \"courses\": [\"6495982e41f4874b30a688b0\"],\r\n    \"supervisor\":\"649d7c3a322fe3975bb4972b\",\r\n    \"passed_courses\":[\"64949ed5c168036eebe95a6f\"]\r\n},{\r\n    \"full_name\": \"Sina\",\r\n    \"user_id\": 7,\r\n    \"password\": \"7\",\r\n    \"email\": \"sina@gmail.com\",\r\n    \"phone\": \"7\",\r\n    \"degree\": \"ab\", \r\n    \"incomingYear\": 1399, \r\n    \"incomingSemester\": 1399, \r\n    \"gradeAverage\": 18.5, \r\n    \"college\": \"CE\", \r\n    \"field\": \"CE\",\r\n    \"courses\": [\"6495982e41f4874b30a688b0\"],\r\n    \"supervisor\":\"649d7c3a322fe3975bb4972b\",\r\n    \"passed_courses\":[\"64949ed5c168036eebe95a6f\"]\r\n}]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/admin/student",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"student"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTk5LCJyb2xlIjoiNjQ1MzllZDc5NjdiZDJmN2Y0NDg3YzQwIiwiaWF0IjoxNjgzNzMwNTg1LCJleHAiOjE2ODM5ODk3ODV9.GY0A21NCcXeaYbo8-c80tJIrTE9aQqe56P7VrKESwEQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\": [\r\n        \"64527983f4410eea5084183c\",\r\n        \"6452799ff4410eea50841840\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/student/6453e1f0b31192815c1ae408",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"student",
+										"6453e1f0b31192815c1ae408"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "managers",
+					"item": [
+						{
+							"name": "Create New Education Manager",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwODUxNmUyMWQ1OTIxZjMwNTRmYyIsInJvbGUiOiI2NGEyMDdlODZlMjFkNTkyMWYzMDU0ZWQiLCJpYXQiOjE2ODgzNDA1NjgsImV4cCI6MTY4ODU5OTc2OH0.QEN8xsmJ7xIlGbf3hc9xP4aPOx02gfLQwYBurH-6kvk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\": \"Ramak\", \r\n    \"user_id\": \"2\", \r\n    \"password\": \"2\", \r\n    \"email\": \"ramak@gmail.com\", \r\n    \"phone\": \"465123\",\r\n    \"college\": \"CE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/admin/manager",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Managers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTYxMjUyZjMyZjk4MzkyOWU4OCIsInJvbGUiOiI2NDk0OThlZTI1MmYzMmY5ODM5MjllN2MiLCJpYXQiOjE2ODc0NjAxOTcsImV4cCI6MTY4NzcxOTM5N30.OhO35vWz2fG9qQINS9rCTxYIWOULZU6-ZsrknyhyhZw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/managers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "term",
+					"item": [
+						{
+							"name": "Create Term",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNDA3NjUsImV4cCI6MTY4ODU5OTk2NX0.T2czP9qj9vEKZykCl_6oZOdMiPkRFP6JiQQh7-z4ehk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"name\":\"Winter\",\r\n     \"semester_courses\": [\"64a20b7c6e21d5921f30552a\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/term",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Terms",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNTcyMzksImV4cCI6MTY4ODYxNjQzOX0.qt4uCYazrTQDjWCMeEfOV1K-B1NaWSK3PVR6oe5JYR4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/terms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"terms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Term By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNTcyMzksImV4cCI6MTY4ODYxNjQzOX0.qt4uCYazrTQDjWCMeEfOV1K-B1NaWSK3PVR6oe5JYR4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/64a2092f6e21d5921f30550f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"64a2092f6e21d5921f30550f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Term By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwMjA5MTMsImV4cCI6MTY4ODI4MDExM30.Tuk0q8X5V7Yf6Ceq0pres_5hBf22MG4gR3V2NIxjEbI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n         \"semester_courses\":[\"6495982e41f4874b30a688b0\",\"64949ed5c168036eebe95a6f\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/term/649d25688fe392df2ed4c198",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Term By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODc0NjUzMzUsImV4cCI6MTY4NzcyNDUzNX0.5dMHqm25Coijvy-0Aiml4eJXnhpJj6XkUbCjr5RXnSA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/term/649593bdf6f61697d5c13fff",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"term",
+										"649593bdf6f61697d5c13fff"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "roles",
+					"item": [
+						{
+							"name": "Create New Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5NjRjODhkYjU0NDZiOTMxMWNlZiIsInJvbGUiOm51bGwsImlhdCI6MTY4NzQ1OTU4MSwiZXhwIjoxNjg3NzE4NzgxfQ.7KXzHGOxA8IQgh8YPdGX6VAzhig6yx-EI6tXc3i1ee8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"supervisor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/roles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles/645c80f688536fb069038d88",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles",
+										"645c80f688536fb069038d88"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Role",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"role2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/role/64539c4fd2e541f0896f3b54",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"64539c4fd2e541f0896f3b54"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Roles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IjY0NWM3ZmJiOWNhOWFhMmQxNDUyZDU1NCIsImlhdCI6MTY4Mzc4MzczMiwiZXhwIjoxNjg0MDQyOTMyfQ.dyJJcjGV09NPWrVtJnIZ394k_F_Lw9akGXjT6fMtCdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Role By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/admin/roles/64539ed7967bd2f7f4487c40",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"roles",
+										"64539ed7967bd2f7f4487c40"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "Preregistration",
+					"item": [
+						{
+							"name": "post-course-preregistered",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWFlZDZjZTRhMzU2YTcyNWE2YzIwMCIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODgwMTk1NDAsImV4cCI6MTY4ODI3ODc0MH0.zpSXNlpQc8cqhy-UuEziu1Rf0FJNv8gr3VgemnKlFK8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\":[\"6495982e41f4874b30a688b0\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/course/preregister/649d21e4a7665b5e77ca9f4f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"preregister",
+										"649d21e4a7665b5e77ca9f4f"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Student's Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM3ODkxODcsImV4cCI6MTY4NDA0ODM4N30.cb2Ktb03S-74DM6cxIpnzy8JcpzP0tvnAM_XfuJBHw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses?field=CE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "field",
+									"value": "CE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM3ODkxODcsImV4cCI6MTY4NDA0ODM4N30.cb2Ktb03S-74DM6cxIpnzy8JcpzP0tvnAM_XfuJBHw4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses/645c82e9274128a7f12f0dad?field=CE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"645c82e9274128a7f12f0dad"
+							],
+							"query": [
+								{
+									"key": "field",
+									"value": "CE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM4MDAzMzgsImV4cCI6MTY4NDA1OTUzOH0.WvDAddqj3BFzLLWPBw2JLTTWpNgcmjyplo-SikZWWBo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"asghar moradi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/student/645c83c2274128a7f12f0db2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"student",
+								"645c83c2274128a7f12f0db2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "professor",
+			"item": [
+				{
+					"name": "Get All Professor's Courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/courses/645c82e9274128a7f12f0dad",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"645c82e9274128a7f12f0dad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Professor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM5YmQyYTIwNDliYzQzYTVhZTY2MSIsInJvbGUiOiI2NDVjODA3Mzg4NTM2ZmIwNjkwMzhkN2YiLCJpYXQiOjE2ODM3OTE3NzksImV4cCI6MTY4NDA1MDk3OX0.q8ocL1jubTNkC7oyLDvMWdhznwFP702iQ68ANzJDUIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"saeed zare\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Professor/645c9bd2a2049bc43a5ae661",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Professor",
+								"645c9bd2a2049bc43a5ae661"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "Create new Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4M2MyMjc0MTI4YTdmMTJmMGRiMiIsInJvbGUiOiI2NDVjODA2Mzg4NTM2ZmIwNjkwMzhkN2MiLCJpYXQiOjE2ODM5MDg1MTgsImV4cCI6MTY4NDE2NzcxOH0.5gRXN1vMSJUL3Nl9R1FrhoZtmUJlkxhyWh5Ii8u2Ep4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"approved\",\r\n    \"courseName\": \"AP\",\r\n    \"prerequisites\" :[],\r\n    \"corequisites\": [],\r\n    \"unit\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/course",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create new Approved Course",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Data Base\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/course",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"course"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Create new Semester Course",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algo\",\r\n    \"prerequisites\" :[\"64a20b7c6e21d5921f30552a\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/courses",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"courses"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Get All Courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4MjRkMjc0MTI4YTdmMTJmMGRhMCIsInJvbGUiOiI2NDVjODA3Zjg4NTM2ZmIwNjkwMzhkODIiLCJpYXQiOjE2ODM5MDk1NDgsImV4cCI6MTY4NDE2ODc0OH0.0yE7IOPEecBcfzApyKx-jEcLNl87w2Gi3ZBhtZInyaE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Course By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/course/64527ac0f4410eea50841846",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course",
+										"64527ac0f4410eea50841846"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Course By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/course/64527ac0f4410eea50841846",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"course",
+										"64527ac0f4410eea50841846"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWM4MjRkMjc0MTI4YTdmMTJmMGRhMCIsInJvbGUiOiI2NDVjODA3Zjg4NTM2ZmIwNjkwMzhkODIiLCJpYXQiOjE2ODM3OTUxNjksImV4cCI6MTY4NDA1NDM2OX0.1g8lAqt8j5sRQVtplrIPt5FYpSsYWxbEMebZvXKHzEI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"prerequisites\": [\"645e66507aa9261d6899931d\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses/645e66d47aa9261d68999326",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses",
+										"645e66d47aa9261d68999326"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algo\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"64527a73f4410eea50841844\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algorithm\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODc0NjA1OTgsImV4cCI6MTY4NzcxOTc5OH0.qhvjqikeX-qnYe2rlXeeip9D_zLN8_9hhkHV6lPA-bA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Data Base\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODc0NjA1OTgsImV4cCI6MTY4NzcxOTc5OH0.qhvjqikeX-qnYe2rlXeeip9D_zLN8_9hhkHV6lPA-bA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Algo\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwMjIwNzgsImV4cCI6MTY4ODI4MTI3OH0.k3njyAEqCjO1v41bxe_hFewW_FQxtFNJ9bwU62ONv4k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"OS\",\r\n    \"prerequisites\" :[\"64527336e5a1e8212d065322\"],\r\n    \"corequisites\": [],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"645e356152e48a2b1b2ee453\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/courses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "{{base_url}}/courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNDEzMTgsImV4cCI6MTY4ODYwMDUxOH0.xVq1vL8L6-TGh2ji6bhHycwxzeLjchrLU6wnBPkxfE0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseType\": \"semester\",\r\n    \"courseName\": \"Mohandesi Net\",\r\n    \"prerequisites\" :[\"64a20a356e21d5921f30551d\"],\r\n    \"corequisites\": [\"64a20a356e21d5921f30551d\"],\r\n    \"unit\": 3,\r\n    \"classDate\": \"2023-05-05 20:00\", \r\n    \"examDate\": \"2023-05-08 20:00\", \r\n    \"examLocation\": \"Tehran\", \r\n    \"courseProfessor\": \"649d7c3a322fe3975bb4972b\", \r\n    \"capacity\": 20, \r\n    \"educationSemester\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/courses",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"courses"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "professor",
+					"item": [
+						{
+							"name": "Get all Professor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgyNzg5NTksImV4cCI6MTY4ODUzODE1OX0.udqYjWk225vVKMnhA85wbnw0IE5bSSZaA3SkbbXqVQE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/Professors?profName=Manam&page=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"Professors"
+									],
+									"query": [
+										{
+											"key": "profName",
+											"value": "Manam"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Professor By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/Professor/645c9bd2a2049bc43a5ae661",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"Professor",
+										"645c9bd2a2049bc43a5ae661"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "student",
+					"item": [
+						{
+							"name": "Get all Student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgyNzg5NTksImV4cCI6MTY4ODUzODE1OX0.udqYjWk225vVKMnhA85wbnw0IE5bSSZaA3SkbbXqVQE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students?studentName=Zahra&page=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "studentName",
+											"value": "Zahra"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Student by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6IjY0NWM4MDdmODg1MzZmYjA2OTAzOGQ4MiIsImlhdCI6MTY4Mzc4NDI5NCwiZXhwIjoxNjg0MDQzNDk0fQ.TYyUadUDgv_no4nq83HPMO9Z7fsr_D7HRDzhfczajQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/student/645c83c2274128a7f12f0db2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"student",
+										"645c83c2274128a7f12f0db2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Preregistration",
+			"item": [
+				{
+					"name": "Educational Assistant",
+					"item": [
+						{
+							"name": "Preregister Semester Course By Manager",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNDA5NTQsImV4cCI6MTY4ODYwMDE1NH0.GitraIXVkveosIjtCVBSJbQkIfy2KXIBwaX2VAz7jAc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"preregistration_semester_course\" : [\"64a20a356e21d5921f30551d\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/term/64a2092f6e21d5921f30550f/preregistration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"64a2092f6e21d5921f30550f",
+										"preregistration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Term By Id From Preregistraition",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODc1Mzg1ODQsImV4cCI6MTY4Nzc5Nzc4NH0.sCEku_eUO9FIoKe7oiBJb2Zg36G5Lv2ePpmRMUyNw4E",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/6495969307c744d8a50032e6/preregistration/64949ed5c168036eebe95a6f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"6495969307c744d8a50032e6",
+										"preregistration",
+										"64949ed5c168036eebe95a6f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Preregistration_Courses By Assistant Based On Course Name",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwMjE3NjUsImV4cCI6MTY4ODI4MDk2NX0.Y6qzSrSsAXgg6h_1GqUyKD9dqw_XDORSpSfQxfCof8E",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/649d25688fe392df2ed4c198/preregistration_courses?id=64949ed5c168036eebe95a6f&page=2&pageSize=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198",
+										"preregistration_courses"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "64949ed5c168036eebe95a6f"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Preregistrations With Id Of Term",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwNDE4OTcsImV4cCI6MTY4ODMwMTA5N30.rh73nGVUnAJko67yJOEQTKrqfGYt6VjV7ROPl87d8rw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/649d25688fe392df2ed4c198/preregistrations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198",
+										"preregistrations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Preregistrations For Semester Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwMzEzOTIsImV4cCI6MTY4ODI5MDU5Mn0.sLkj6kXmIvijn8-zRcWKt2tEuaVYAxNOBHCGQP85PLc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/course/64949ed5c168036eebe95a6f/preregistrations?examLocation=Tehran&page=2&pageSize=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"64949ed5c168036eebe95a6f",
+										"preregistrations"
+									],
+									"query": [
+										{
+											"key": "examLocation",
+											"value": "Tehran"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post List Of Courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgxOTI0NDIsImV4cCI6MTY4ODQ1MTY0Mn0.9XTl0wlYtRDcwIUyYvekcQLoRHTHmUaCEFfjbL8KMws",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"preregistration_semester_course\" : [\"649e6c884afbab0187036bf6\",\"64949ed5c168036eebe95a6f\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/term/649d25688fe392df2ed4c198/preregistration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198",
+										"preregistration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Preregistered Course Using Course Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgyMTg3NTUsImV4cCI6MTY4ODQ3Nzk1NX0.1FobVVdtFs4eC03k1YpboSgxYauXGcBXCxBI1qkMQok",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/649d25688fe392df2ed4c198/preregistration_courses?objectId=6495982e41f4874b30a688b0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198",
+										"preregistration_courses"
+									],
+									"query": [
+										{
+											"key": "objectId",
+											"value": "6495982e41f4874b30a688b0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Student",
+					"item": [
+						{
+							"name": "Post Preregister",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOThmNmUyMWQ1OTIxZjMwNTUxNiIsInJvbGUiOiI2NGEyMDgwZTZlMjFkNTkyMWYzMDU0ZjMiLCJpYXQiOjE2ODgzNDExNjEsImV4cCI6MTY4ODYwMDM2MX0.lhd-WGTTkahb8caQUStcsWIkLvBu8yMyQwB0UDfH6TE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\": [\"64a2092f6e21d5921f30550f\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/course/preregister",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"preregister"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post preregistration demand by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOThmNmUyMWQ1OTIxZjMwNTUxOSIsInJvbGUiOiI2NGEyMDgwZTZlMjFkNTkyMWYzMDU0ZjMiLCJpYXQiOjE2ODgzNTQ5NTksImV4cCI6MTY4ODYxNDE1OX0.SDAteNYBS7gqTQeuM-c-6Cf1TWQ5fiHVdP03j7hds3k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\": [\"64a2400d248317c07ef2cf79\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/course/preregister/64a2092f6e21d5921f30550f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"preregister",
+										"64a2092f6e21d5921f30550f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Preregistered Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWFlZDZjZTRhMzU2YTcyNWE2YzIwMCIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODc4NzQ5NzUsImV4cCI6MTY4ODEzNDE3NX0.NqzEfoGKA5CpFsEIVvbUbgbMdM5l1mgbwTUmuLxWSqg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/course/preregister/649d4e1bc4d908b33cc80095/64949ed5c168036eebe95a6f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"preregister",
+										"649d4e1bc4d908b33cc80095",
+										"64949ed5c168036eebe95a6f"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "Educational Assistant",
+					"item": [
+						{
+							"name": "Post Semester Course Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNTU4NjcsImV4cCI6MTY4ODYxNTA2N30.0Klftt8C__PQ55s7TCqK67FC3KDgprU7oSbtVKdJIV8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"registration_semester_course\" : [\"64a20b7c6e21d5921f30552a\",\"64a20a356e21d5921f30551d\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/term/64a2092f6e21d5921f30550f/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"64a2092f6e21d5921f30550f",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Term By Id Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNTYxODIsImV4cCI6MTY4ODYxNTM4Mn0.5_BgrW1u9As8Eg3pouAdbfWmZd0e2taCwdCxloV9_L4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/term/64a2092f6e21d5921f30550f/registration_courses",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"64a2092f6e21d5921f30550f",
+										"registration_courses"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete term By Id Registration",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODc2NDI5MDEsImV4cCI6MTY4NzkwMjEwMX0.GXd_JJIBcRMkhdwKEw1mLXWBaJ8e0av6IKBL6oR_5yc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/term/6495969307c744d8a50032e6/registration/6495982e41f4874b30a688b0",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"6495969307c744d8a50032e6",
+										"registration",
+										"6495982e41f4874b30a688b0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Registration_Courses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOGFhNmUyMWQ1OTIxZjMwNTUwNyIsInJvbGUiOiI2NGEyMDdmMzZlMjFkNTkyMWYzMDU0ZWYiLCJpYXQiOjE2ODgzNTYzMzYsImV4cCI6MTY4ODYxNTUzNn0.LZzoEK_bBy-eHCln52l5-kMksvcZCXPTnxHP4Ew7-DA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/64a2092f6e21d5921f30550f/registration_courses?id=64a20b7c6e21d5921f30552a&page=1&pageSize=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"64a2092f6e21d5921f30550f",
+										"registration_courses"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "64a20b7c6e21d5921f30552a"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Student",
+					"item": [
+						{
+							"name": "Register In Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTIwOThmNmUyMWQ1OTIxZjMwNTUxOSIsInJvbGUiOiI2NGEyMDgwZTZlMjFkNTkyMWYzMDU0ZjMiLCJpYXQiOjE2ODgzNTU5MTMsImV4cCI6MTY4ODYxNTExM30.jYD6Bkp-tN4XrSzQirZWqdKIqbquvT9puuq1opY4Gec",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courses\":[\"64a20b7c6e21d5921f30552a\"],\r\n    \"confirmed\":\"false\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/course/register/64a2092f6e21d5921f30550f",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"register",
+										"64a2092f6e21d5921f30550f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Registering In Course",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWFkMTY5Zjk2YTQxMjQxMGY5MzQyNiIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODgwMzI5NTEsImV4cCI6MTY4ODI5MjE1MX0.XJE-xr6F2pbDmGzbavdwQo8DutS0l8pIS0BCko6B3hE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/course/register/649d59579aa90cff15e9387f/6495982e41f4874b30a688b0",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"course",
+										"register",
+										"649d59579aa90cff15e9387f",
+										"6495982e41f4874b30a688b0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Registration List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWFlZDZjZTRhMzU2YTcyNWE2YzIwMCIsInJvbGUiOiI2NDk0OTkxOTI1MmYzMmY5ODM5MjllODIiLCJpYXQiOjE2ODgwNjc3NzYsImV4cCI6MTY4ODMyNjk3Nn0.eTNDMxu2jiOARkNyVdAnzunoFQysrhTY0feu4ebMEW0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/term/649d25688fe392df2ed4c198/registrations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"term",
+										"649d25688fe392df2ed4c198",
+										"registrations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Supervisor",
+			"item": [
+				{
+					"name": "Post Instructor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTQ5OTZlMjUyZjMyZjk4MzkyOWU4ZCIsInJvbGUiOiI2NDk0OTkwNDI1MmYzMmY5ODM5MjllN2UiLCJpYXQiOjE2ODgwNDE1NDEsImV4cCI6MTY4ODMwMDc0MX0.YcPkvxQaCMiqrfogR4EKDxeuypRhYKnu8ybT3OkuXcw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"full_name\": \"Hashemi\",\r\n            \"user_id\": 1234,\r\n            \"password\": \"1234\",\r\n            \"email\": \"hastu@gmail.com\",\r\n            \"phone\": \"0912000\",\r\n            \"college\": \"CE\",\r\n            \"field\": \"CE\",\r\n            \"rank\": \"Instructor\",\r\n            \"courses\":[\"64949ed5c168036eebe95a6f\"],\r\n            \"students\":[\"649aed6ce4a356a725a6c200\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/mert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"mert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Registation By Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWQ4MGZmMjMyNTA1NGRiNzUzNzI3NCIsInJvbGUiOiI2NDlkODAwNzM3NDEzZWQ5YTZjNGQ0MGMiLCJpYXQiOjE2ODgwNDM3ODYsImV4cCI6MTY4ODMwMjk4Nn0.0H0uZSbShWASwRKoYcvK-bhbqqu-RNePW-1lM6BCOS4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/course/6495982e41f4874b30a688b0/registrations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"course",
+								"6495982e41f4874b30a688b0",
+								"registrations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Registration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWQ4MGZmMjMyNTA1NGRiNzUzNzI3NCIsInJvbGUiOiI2NDlkODAwNzM3NDEzZWQ5YTZjNGQ0MGMiLCJpYXQiOjE2ODgwNjk1OTYsImV4cCI6MTY4ODMyODc5Nn0.4-7OeEa0NPf39HbGj2DcS-QSRS1xrRrXFmR7wfrWJoA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/registration/649ad169f96a412410f93426",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"registration",
+								"649ad169f96a412410f93426"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
