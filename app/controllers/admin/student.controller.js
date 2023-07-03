@@ -11,6 +11,7 @@ const ROLES = db.ROLES;
 const PREREGISTER = db.preregistration
 const REGISTER = db.registration
 const TERM = db.terms
+const COURSES = db.courses
 const requiredStudentParams = [
     "full_name",
     "user_id",
@@ -26,7 +27,7 @@ const requiredStudentParams = [
 ];
 
 export default class StudentController {
-    static async create(req, res) {
+    static async createOneStudent(req, res) {
         if (!existAllParams(requiredStudentParams, req.body)) {
             return res
                 .status(400)
@@ -46,7 +47,10 @@ export default class StudentController {
                 gradeAverage,
                 college,
                 field,
-                courses
+                courses,
+                supervisor,
+                passed_courses
+
             } = req.body;
             const password_hash = await hash(password, 10); // hash the password with salt round 10
 
@@ -65,7 +69,9 @@ export default class StudentController {
                 college,
                 field,
                 role,
-                courses
+                courses,
+                supervisor,
+                passed_courses
             });
             const data = await student.save(student);
             res.status(201).json(
@@ -81,6 +87,74 @@ export default class StudentController {
             );
         }
     }
+
+    static async create(req, res) {
+        if (!Array.isArray(req.body) || req.body.length === 0) {
+            return res
+                .status(400)
+                .json(createResponse(true, "Invalid or empty student list!"));
+        }
+
+        const createdStudents = [];
+
+        try {
+            for (const studentData of req.body) {
+                const {
+                    full_name,
+                    user_id,
+                    password,
+                    email,
+                    phone,
+                    degree,
+                    incomingYear,
+                    incomingSemester,
+                    gradeAverage,
+                    college,
+                    field,
+                    courses,
+                    supervisor,
+                    passed_courses
+                } = studentData;
+
+                const password_hash = await hash(password, 10);
+
+                const role = await Role.findOne({ name: ROLES[3] });
+
+                const student = new Student({
+                    full_name,
+                    user_id,
+                    password_hash,
+                    email,
+                    phone,
+                    degree,
+                    incomingYear,
+                    incomingSemester,
+                    gradeAverage,
+                    college,
+                    field,
+                    role,
+                    courses,
+                    supervisor,
+                    passed_courses
+                });
+
+                const createdStudent = await student.save();
+                createdStudents.push(createdStudent);
+            }
+
+            res.status(201).json(
+                createResponse(true, "Students Created Successfully!", createdStudents)
+            );
+        } catch (err) {
+            res.status(500).json(
+                createResponse(
+                    false,
+                    err.message || "Some error occurred while creating the students."
+                )
+            );
+        }
+    }
+
 
     static async update(req, res) {
         if (!Object.keys(req.body).length) {
@@ -134,11 +208,30 @@ export default class StudentController {
     }
 
     static async getAllStudents(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         try {
+            const student_name = req.query.studentName;
+            let courseFound = null
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
             const data = await Student.find().populate('role');
+            courseFound = data
+            if (student_name) {
+                courseFound = data.filter(
+                    (item) => item.full_name === student_name
+                );
+            }
+
+            let paginatedCourseFound = courseFound;
+            if (courseFound) {
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                paginatedCourseFound = courseFound.slice(startIndex, endIndex);
+            }
+
             return res
                 .status(200)
-                .json(createResponse(true, "get all students", data));
+                .json(createResponse(true, "get all students", paginatedCourseFound));
         } catch (err) {
             return res
                 .status(500)
@@ -305,16 +398,32 @@ export default class StudentController {
     }
 
     static async getPreregistration(req, res) {
+        const DEFAULT_PAGE_SIZE = 10;
         try {
             const preregistration_list = []
             const course_id = req.params.id
-            const data = await PREREGISTER.find()
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+            const examLocation = req.query.examLocation;
+            const data = await PREREGISTER.find().populate({path:"courses",model:"semesterCourses"})
+
             for (let i = 0; i < data.length; i++) {
-                if (data[i].courses == course_id) {
-                    preregistration_list.push(data[i])
-                }
+
+                let z = data[i].courses
+                for (let j = 0; j <z.length ; j++) {
+                    if (z[j]._id == course_id && z[j].examLocation == examLocation) {
+                       preregistration_list.push(data[i])
+                     }
+                }//TODO
             }
-            return res.status(201).json(createResponse(true, "Get Preregistration Successfully ", preregistration_list))
+            let paginatedCourseFound = preregistration_list;
+            if (preregistration_list) {
+                const startIndex = (page - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                paginatedCourseFound = preregistration_list.slice(startIndex, endIndex);
+            }
+
+            return res.status(201).json(createResponse(true, "Get Preregistration Successfully ", paginatedCourseFound))
 
 
         } catch (err) {
@@ -360,39 +469,102 @@ export default class StudentController {
     static async registerDemand(req, res) {
         try {
             const term = req.params.id
-            const student = req.user_id
+            const student_id = req.user_id
             const register = await TERM.findById(term)
-            const {courses,confirmed} =
+            const {courses, confirmed} =
                 req.body;
             const registration = new REGISTER({
-                student,
+                student_id,
                 courses,
                 term,
                 confirmed
             });
-            const registration_semester_course = register.registration_semester_course
-            for (const item1 of registration_semester_course) {
-                const strItem1 = String(item1);
-                for (const item2 of courses) {
-                    const strItem2 = String(item2);
-                    if (strItem1 === strItem2) {
-                        const data = await registration.save(registration);
-                        res.status(201).json(
-                            createResponse(true, "Registered Successfully!", data))
-                    } else {
-                        res.status(500).json(
-                            createResponse(
-                                false,
-
-                                "Course Is Not In Registering List!"
-                            )
-                        );
+            let courses_lst = []
+            for (let i = 0; i < courses.length; i++) {
+                const course = await COURSES.findById(courses[i])
+                courses_lst.push(course)
+            }
+            const hasDuplicateExamDate = coursesList => {
+                for (let i = 0; i < coursesList.length - 1; i++) {
+                    for (let j = i + 1; j < coursesList.length; j++) {
+                        if (coursesList[i].examDate === coursesList[j].examDate) {
+                            return true;
+                        }
                     }
                 }
+                return false;
+            };
+            const passedPrerequisites = async coursesList => {
+                const student = await Student.findById(student_id)
+                const courses_passed = student.passed_courses
+                for (let i = 0; i < coursesList.length; i++) {
+                    const prerequisite_lst = coursesList[i].prerequisites
+                    for (let j = 0; j < prerequisite_lst.length; j++) {
+                        for (let k = 0; k < courses_passed.length; k++) {
+                            if (prerequisite_lst[i].equals(courses_passed[k])) {
+                                return true
+                            }
+                        }
+                    }
+
+                }
+                return false
+            };
+            if (hasDuplicateExamDate(courses_lst)) {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        "The Course Have Conflict!"
+                    )
+                );
+            }
+            if (await passedPrerequisites(courses_lst)) {
+                const registration_semester_course = register.registration_semester_course
+
+                let hasCommonAttribute = false;
+
+                for (let i = 0; i < registration_semester_course.length; i++) {
+                    const item1 = registration_semester_course[i];
+                    const strItem1 = String(item1);
+
+                    for (let j = 0; j < courses.length; j++) {
+                        const item2 = courses[j];
+                        const strItem2 = String(item2);
+
+                        if (strItem1 === strItem2) {
+                            hasCommonAttribute = true;
+                            break;
+                        }
+                    }
+
+                    if (hasCommonAttribute) {
+                        break;
+                    }
+                }
+                if (hasCommonAttribute) {
+                    const data = await registration.save(registration);
+                    return res.status(201).json(createResponse(true, "Registered Course Successfully", data))
+                }
+                return res.status(500).json(
+                    createResponse(
+                        false,
+
+                        "Some error occurred while Registering."
+                    )
+                );
+
+            } else {
+                res.status(500).json(
+                    createResponse(
+                        false,
+                        "You did not passed preregistered course."
+                    )
+                );
             }
 
+
         } catch (err) {
-            res.status(500).json(
+            return res.status(500).json(
                 createResponse(
                     false,
                     err.message ||
@@ -400,6 +572,7 @@ export default class StudentController {
                 )
             );
         }
+
 
     }
 
@@ -442,7 +615,7 @@ export default class StudentController {
     }
 
     static async getRegistrationsByTermId(req, res) {
-        if(req.user_role == "supervisor"){
+        if (req.user_role == "supervisor") {
             const term_id = req.params.id
             REGISTER.find({term: term_id})
                 .then((foundDocuments) => {
@@ -459,16 +632,15 @@ export default class StudentController {
                         )
                     );
                 });
-        }
-        else {
+        } else {
             const student_id = req.user_id
             const term_id = req.params.id
             REGISTER.find({student: student_id})
                 .then((foundDocuments) => {
-                 if(foundDocuments.some(obj=>String(obj.term)===term_id))
-                    return res
-                        .status(200)
-                        .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
+                    if (foundDocuments.some(obj => String(obj.term) === term_id))
+                        return res
+                            .status(200)
+                            .json(createResponse(true, "Get registrations  Successfully", foundDocuments));
                 })
                 .catch((err) => {
                     res.status(500).json(

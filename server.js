@@ -23,12 +23,12 @@ app.use(requestRateLimit);
 app.use(cors({origin: "http://127.0.0.1:3001"}));
 app.use(json());
 app.use(urlencoded({extended: true}));
-
+const HOST = '0.0.0.0';
 
 try {
     // connect to database and listen at PORT
     const connectToDB = db.mongoose.connect(db.url, db.option);
-    const listen = app.listen(PORT);
+    const listen = app.listen(PORT,HOST,()=>{console.log("connected")});
 
     await Promise.all([connectToDB, listen]);
     console.log(

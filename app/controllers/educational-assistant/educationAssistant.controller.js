@@ -37,7 +37,12 @@ export default class EducationAssistantController {
     static async getTermById(req, res) {
         const id = req.params.id;
         try {
-            const data = await Term.findById(id)//.populate('role'); //TODO:popolate role ok kon
+
+
+            const data = await Term.findById(id).populate
+            ({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}).populate({path:"preregistration_semester_course",model:"courses"}).populate({path:"registration_semester_course",model:"courses"});
+            // const data = await Term.findById(id).populate
+            // ({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}); //TODO:p   const data = await Term.findById(id).populate({path:"user_id",model:"BaseUserSchema",populate:{path:"courses",model:"courses"}}); //TODO:popolate role ok kon
             if (data)
                 return res
                     .status(200)
@@ -152,13 +157,15 @@ export default class EducationAssistantController {
         try {
             const data = await Term.findById(id);
             const registration_semester_course_list = data.registration_semester_course;
-            registration_semester_course_list.push(req.body.registration_semester_course);
-            data.registration_semester_course = registration_semester_course_list;
-            await data.save();
+            const course_registration =  req.body.registration_semester_course
+            for (let i = 0; i <course_registration.length ; i++) {
+               registration_semester_course_list.push(course_registration[i]);
+                data.registration_semester_course = registration_semester_course_list;
+                await data.save();
+            }
             return res
                 .status(200)
                 .json(createResponse(true, "semester course registered Successfully"));
-
         } catch (err) {
             res.status(500).json(
                 createResponse(

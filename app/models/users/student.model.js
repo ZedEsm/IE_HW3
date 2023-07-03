@@ -46,18 +46,21 @@ export default (mongoose) =>
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'supervisors',
             },
-
+            passed_courses:[{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'courses',
+            }],
             term:[{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'terms'
             }],
-            preregistration_semester_course:[{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'preregistration'
-            }],
-            registration_semester_course:[{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'registration'
-            }]
+            // preregistration_semester_course:[{
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     ref: 'preregistration'
+            // }],
+            // registration_semester_course:[{
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     ref: 'registration'
+            // }]
         })
     );
